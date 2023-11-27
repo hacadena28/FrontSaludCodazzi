@@ -1,0 +1,20 @@
+<head>
+<!-- Agrega los estilos de Bootstrap a tu archivo HTML -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<nav class="flex justify-around items-center h-[5rem] border">
+<article class="w-[10%] bg-slate-100">
+    <img class="w-[4.5rem]" src="assets/logo_h.png" alt="">
+</article>
+<article class=" w-[70%] flex justify-center "><ul class="flex gap-[5rem]">
+    <li><button (click)="navigateRegister()">Registrar</button></li>
+    <li><button>Ver citas</button></li>
+</ul></article>
+<article class="w-[5%]">
+    logout
+</article>
+</nav>
+<main class="p-[1.5rem]">
+    <ng-content></ng-content>
+</main>
