@@ -1,0 +1,33 @@
+<main class="py-[3rem] flex justify-center fondo  h-screen">
+<article class="w-[90%]  flex justify-center">
+    <table class=" bg-white w-[90%] h-[70%] border-spacing-2 shadow-lg  table-fixed">
+        <thead class="h-[5px] border rounded-xl ">
+            <tr class="text-left indent-5">
+                <th class="border bg-slate-200 text-left  w-[15rem]">Id</th>
+                <th class="border  bg-slate-200 ">Nombre</th>
+                <th class="border bg-slate-200 ">Fecha</th>
+                <th class="border bg-slate-200 ">Descripcion</th>
+                <th class="border bg-slate-200 ">Horas</th>
+                <th class="border bg-slate-200 ">Estado</th>
+            </tr>
+        </thead>
+        <tbody class="indent-5 border-spacing-2 ">
+            <tr class="message " *ngIf="lista2.length === 0">
+                <td class="text-[1.5rem]" colspan="6"><b>No hay citas agendadas</b></td>
+            </tr>
+            <tr *ngFor="let li of lista2">
+            <td class="w-[5%] h-[3rem] border border-collapse">{{li.id}}</td>
+            <td class="w-[15%] border">{{li.nameCita}}</td>
+            <td class="w-[15%] border">{{li.dateAgendCita }}</td>
+            <td class="w-[20%] border">{{li.description}}</td>
+            <td class="w-[15%] border">{{li.hourCita}}</td>
+            <td class="w-[15%] border"><article class="flex w-full items-center  justify-around">
+                <div class="w-[80%]">{{li.state}}</div> <div 
+                [ngClass]="{'aprobada': li.state === 'Aprobada','pendiente': li.state === 'Pendiente','rechazada': li.state === 'Rechazada'}">
+            </div></article></td>
+            </tr>
+        </tbody>
+       
+    </table>
+   </article>
+</main>

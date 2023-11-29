@@ -9,7 +9,7 @@
 </article>
 <article class=" w-[70%] flex justify-center "><ul class="flex gap-[5rem]">
     <li><button (click)="navigateRegister()">Registrar</button></li>
-    <li><button>Ver citas</button></li>
+    <li><button (click)="navigateConsultarCitas()">Ver citas</button></li>
 </ul></article>
 <article class="w-[5%]">
     logout
@@ -17,4 +17,5 @@
 </nav>
 <main class="p-[1.5rem]">
     <ng-content></ng-content>
+    <app-footer></app-footer>    
 </main>
