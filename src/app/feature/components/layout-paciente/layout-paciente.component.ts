@@ -18,7 +18,9 @@ export class LayoutPacienteComponent {
   navigateRegister(){
     this.router.navigate(['/paciente/registrar-cita'])
   }
-
+  navigateConsultarCitas(){
+    this.router.navigate(['/paciente/consultar-citas'])
+  }
   showModal(state:boolean){}
     state = true;
 }

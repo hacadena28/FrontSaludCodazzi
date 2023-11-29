@@ -1,0 +1,18 @@
+<article class="w-full h-screen flex justify-center -center">
+    <section class="border w-[50%] h-[70%] flex flex-col justify-center gap-[5rem] items-center">
+        <section><h1 class="text-[1.8rem]"><b>Registra tu cita</b></h1></section>
+        <form action="" class="flex flex-wrap w-[95%] h-[50%]  justify-around">
+            <section class="w-[48%] h-[2rem] "><input  name="nombre" class="border w-full h-full rounded-md indent-5" placeholder="Nombre" type="text" /></section>
+            <section class="w-[48%] h-[2rem] "><input  name="apellido" class="border w-full h-full rounded-md indent-5" placeholder="Apellido" type="text" /></section>
+            <section class="w-[48%] h-[2rem] "><input bsDatepicker name="fecha"  class="form-control" placeholder="Fecha" type="text" ng2-datepicker  /></section>
+            <section class="w-[48%] h-[2rem] ">
+                <select >
+                    <option value="">Doctor</option>
+                    <option *ngFor="let doctor of doctors">{{doctor.firstname}}</option>
+                </select>
+            </section>
+            <section class="w-[98%] h-[5rem]"><input  name="descripcion" class="border w-full h-full rounded-md indent-5" placeholder="Nombre" type="text" /></section>
+            <section class="w-[35%] h-[2rem] rounded-md "><button (click)="registrarCita()" class=" w-full">Regitrar</button></section>
+        </form>
+    </section>
+</article>
