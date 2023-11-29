@@ -31,7 +31,7 @@ import { FooterComponent } from './footer/footer.component';
   exports:[
     LayoutComponent,
     LayoutPacienteComponent,
-    LayoutPacienteComponent,
+    LayoutDoctorComponent,
     FooterComponent
   ]
 })
