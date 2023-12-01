@@ -9,10 +9,10 @@
       <thead class="h-[5px] border rounded-xl">
         <tr class="text-left indent-5">
           <th class="border bg-slate-200 text-left w-[15rem]">Id</th>
-          <th class="border bg-slate-200">Nombre</th>
-          <th class="border bg-slate-200">Fecha</th>
+          <th class="border bg-slate-200">Paciente</th>
           <th class="border bg-slate-200">Descripcion</th>
-          <th class="border bg-slate-200">Horas</th>
+          <th class="border bg-slate-200">Fecha y Hora</th>
+          <th class="border bg-slate-200">Doctor</th>
           <th class="border bg-slate-200">Estado</th>
         </tr>
       </thead>
@@ -24,22 +24,11 @@
         </tr>
         <tr *ngFor="let item of data | paginate: { itemsPerPage: perPage, currentPage: page, totalItems: total }">
           <td class="w-[5%] h-[3rem] border border-collapse">{{ item.id }}</td>
-          <td class="w-[15%] border">{{ item.date }}</td>
-          <td class="w-[15%] border">{{ item.appointmentStartDate }}</td>
+          <td class="w-[15%] border">{{ item.patientId }}</td>
           <td class="w-[20%] border">{{ item.description }}</td>
-          <td class="w-[15%] border">{{ item.type }}</td>
-          <td class="w-[15%] border">
-            <article class="flex w-full items-center justify-around">
-              <div class="w-[80%]">{{ item.state }}</div>
-              <div
-                [ngClass]="{
-                  aprobada: item.state === 'Aprobada',
-                  pendiente: item.state === 'Pendiente',
-                  rechazada: item.state === 'Rechazada'
-                }"
-              ></div>
-            </article>
-          </td>
+          <td class="w-[15%] border">{{ item.appointmentStartDate }}</td>
+          <td class="w-[15%] border">{{ item.doctorId }}</td>
+          <td class="w-[15%] border">{{ item.state }}</td>
         </tr>
       </tbody>
 

@@ -8,7 +8,6 @@ import { ConsultarCitaComponent } from './consultar-cita/consultar-cita.componen
 import {ComponentsModule} from "../../components/components.module";
 import {NgxPaginationModule} from "ngx-pagination";
 import { ReactiveFormsModule } from '@angular/forms';
-import { AppointmentService } from './shared/services/appointment.service';
 
 
 @NgModule({
@@ -25,7 +24,7 @@ import { AppointmentService } from './shared/services/appointment.service';
     ReactiveFormsModule
   ],
   providers: [
-    DatePipe, AppointmentService
+    DatePipe
   ]
 })
 export class PatientModule { }

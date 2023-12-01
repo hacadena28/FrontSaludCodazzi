@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { AppointmentPaginatedDTO } from '../shared/models/paginated.interface';
-import { AppointmentService } from '../shared/services/appointment.service';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-consultar-cita',
@@ -9,29 +8,36 @@ import { AppointmentService } from '../shared/services/appointment.service';
   styleUrls: ['./consultar-cita.component.scss']
 })
 export class ConsultarCitaComponent {
+  http = inject(HttpClient);
 
-  data: AppointmentPaginatedDTO[] = [];
+  data: any[] = [];
   page = 1;
   total = 0;
   perPage = 10;
   totalRecords = 0;
+  lista2: any[] = [];
 
-  http = inject(HttpClient);
-  CS = inject(AppointmentService);
-
+  // Modifica este método para realizar la consulta de citas
   getData(page: number = 1) {
-    this.CS.getAllPaginated(page, 5).subscribe(response => {
-      this.data = response.records;
-      this.total = response.totalRecords + 1;
-      console.log(this.data);
+    const url = `${environment.appUrl}appointment`;
 
-    });
+    // Puedes añadir parámetros a la URL, por ejemplo, para la paginación
+    const params = {
+      page: page.toString(),
+      perPage: this.perPage.toString()
+    };
+
+    this.http.get(url, { params })
+      .subscribe((response: any) => {
+        this.data = response.data; // Ajusta esto según la estructura de tu respuesta
+        this.total = response.total; // Ajusta esto según la estructura de tu respuesta
+        this.totalRecords = response.totalRecords; // Ajusta esto según la estructura de tu respuesta
+      });
   }
 
+  // Este método podría ser útil si necesitas cambiar la página desde algún otro lugar
   pageChanged(page: number) {
     this.page = page;
     this.getData(this.page);
   }
-
-  lista2: any[] = [];
 }

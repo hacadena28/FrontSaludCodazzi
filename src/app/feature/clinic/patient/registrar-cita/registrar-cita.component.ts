@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from "@env/environment";
 import { DatePipe } from '@angular/common';
 
+
 interface Doctor {
   id: number;
   name: string;
@@ -24,10 +25,8 @@ interface Cita {
   styleUrls: ['./registrar-cita.component.scss']
 })
 export class RegistrarCitaComponent implements OnInit {
-
   formulario!: FormGroup;
   doctors: Doctor[] = [];
-
   horasIntermedias: string[] = [];
   typeAppointmentOptions: any[] = [{ value: 'General', name: 'General' }, { value: 'Specialized', name: 'Especializada' }];
 
@@ -78,10 +77,10 @@ export class RegistrarCitaComponent implements OnInit {
       const cita: Cita = this.formulario.value;
       cita.appointmentStartDate = this.datePipe.transform(cita.appointmentStartDate, 'yyyy-MM-ddTHH:mm:ss');
 
-
       this.http.post(`${environment.appUrl}appointment`, cita)
         .subscribe(response => {
           console.log('Cita registrada exitosamente:', response);
+          alert('Cita registrada exitosamente'); 
         });
     }
   }
