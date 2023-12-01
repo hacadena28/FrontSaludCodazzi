@@ -14,6 +14,13 @@ import { DoctorManagementComponent } from './doctor-management/doctor-management
 import { PatientManagementComponent } from './patient-management/patient-management.component';
 import {DoctorService} from "./doctor-management/shared/doctor.service";
 import {UserService} from "./doctor-management/shared/user.service";
+import { TableEpsComponent } from './eps-management/components/table-eps/table-eps.component';
+import { FormCreateEpsComponent } from './eps-management/components/form-create-eps/form-create-eps.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {MdbModalModule} from "mdb-angular-ui-kit/modal";
+import {MatButtonModule} from "@angular/material/button";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatCardModule} from "@angular/material/card";
 
 
 
@@ -22,6 +29,9 @@ import {UserService} from "./doctor-management/shared/user.service";
     EpsManagementComponent,
     LayoutAdminComponent,
     SidebarAdminComponent,
+    PageAdminComponent,
+    TableEpsComponent,
+    FormCreateEpsComponent,
     PageAdminComponent,
     DoctorManagementComponent,
     PatientManagementComponent
@@ -32,7 +42,12 @@ import {UserService} from "./doctor-management/shared/user.service";
     MatPaginatorModule,
     MatTableModule,
     NgxPaginationModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    MdbModalModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatCardModule
   ],
   providers: [EpsService,DoctorService,UserService],
 })
