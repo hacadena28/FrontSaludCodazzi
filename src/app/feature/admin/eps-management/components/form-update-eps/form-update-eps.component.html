@@ -7,14 +7,14 @@
       <img src="assets/eps.jpg" />
     </section>
     <section class="w-[40%] h-full flex flex-col gap-2 justify-center items-center">
-      <h1 class="text-xl">Editar EPS</h1>
+      <h1 class="text-xl">Actualizar EPS</h1>
       <div class="w-[85%] h-[50%]">
         <form [formGroup]="formulario" class="w-full h-full flex gap-2 flex-wrap">
-          <input formControlName="name" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2" type="text" name="name" placeholder="Nombre de EPS" id="name" />
+          <input  formControlName="name" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2" type="text" name="name" placeholder="Nombre de EPS" id="name" />
         </form>
       </div>
       <div class="w-[80%]">
-        <button class="border h-[1.8rem] rounded-md w-full bg-[#2563eb] text-white text-sm" (click)="registerEPS()"><b>Registrar EPS</b></button>
+        <button class="border h-[1.8rem] rounded-md w-full bg-[#2563eb] text-white text-sm" (click)="updateEPS()"><b>Actualizar EPS</b></button>
       </div>
     </section>
   </article>

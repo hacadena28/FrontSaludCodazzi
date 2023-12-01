@@ -17,6 +17,7 @@ import {MdbModalModule} from "mdb-angular-ui-kit/modal";
 import {MatButtonModule} from "@angular/material/button";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatCardModule} from "@angular/material/card";
+import {FormUpdateEpsComponent} from "./eps-management/components/form-update-eps/form-update-eps.component";
 
 
 
@@ -27,7 +28,8 @@ import {MatCardModule} from "@angular/material/card";
     SidebarAdminComponent,
     PageAdminComponent,
     TableEpsComponent,
-    FormCreateEpsComponent
+    FormCreateEpsComponent,
+    FormUpdateEpsComponent
   ],
   imports: [
     CommonModule,
