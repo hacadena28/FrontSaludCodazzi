@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { EpsPaginatedDto, Paginated } from './shared/models/eps-paginated-dto.model';
+import { EpsPaginatedDto } from './shared/models/eps-paginated-dto.model';
 import { EpsService } from './shared/service/eps.service';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-eps-management',
@@ -10,14 +10,15 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
   styleUrls: ['./eps-management.component.scss']
 })
 export class EpsManagementComponent implements OnInit, AfterViewInit {
-    epsPaginated: Paginated<EpsPaginatedDto>;
-    page: number = 1;
-    recordsPerPage = 10;
-    displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+    page: number = 0;
+    recordsPerPage = 5;
+    pageSizeOptions = [5, 10, 20];
+    displayedColumns: any[] = [{field: 'id', name: "Id"}, {field: 'name', name: "Nombre"}, {field: 'state', name: "Estado"}];
+    totalRecords = 0;
     dataSource = new MatTableDataSource<EpsPaginatedDto>();
-  
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-  
+
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+
     ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;
     }
@@ -26,12 +27,21 @@ export class EpsManagementComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
+      this.dataSource.paginator = this.paginator;
       this.getEpsPaginated();
     }
 
+  handlePageEvent(e: PageEvent) {
+    debugger;
+    this.recordsPerPage = e.pageSize;
+    this.page = e.pageIndex;
+    this.getEpsPaginated();
+  }
+
     getEpsPaginated() {
-      this.epsService.getAllPaginated(this.page, this.recordsPerPage).subscribe(result => {
-        this.epsPaginated = result;
+      this.epsService.getAllPaginated(this.page + 1, this.recordsPerPage).subscribe(result => {
+        this.dataSource.data = result.records;
+        this.totalRecords = result.totalRecords;
       });
     }
 }

@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {CreateUserPatient} from "../shared/models/create-patient.interface";
 import {CreatePatientService} from "../shared/service/patient.service";
-import {EpsService} from "../../admin/eps-management/shared/service/patient.service";
 import {EpsDto} from "../../admin/eps-management/shared/models/eps-dto.interface";
+import {EpsService} from "../../admin/eps-management/shared/service/eps.service";
 
 @Component({
   selector: 'app-register',
