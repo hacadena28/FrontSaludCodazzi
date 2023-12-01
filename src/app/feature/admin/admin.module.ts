@@ -15,6 +15,8 @@ import { FormCreateEpsComponent } from './eps-management/components/form-create-
 import {ReactiveFormsModule} from "@angular/forms";
 import {MdbModalModule} from "mdb-angular-ui-kit/modal";
 import {MatButtonModule} from "@angular/material/button";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatCardModule} from "@angular/material/card";
 
 
 
@@ -36,7 +38,9 @@ import {MatButtonModule} from "@angular/material/button";
     MatIconModule,
     ReactiveFormsModule,
     MdbModalModule,
-    MatButtonModule
+    MatButtonModule,
+    MatChipsModule,
+    MatCardModule
   ],
   providers: [EpsService],
 })
