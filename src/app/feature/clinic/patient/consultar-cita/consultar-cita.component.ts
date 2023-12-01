@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { environment } from '@env/environment';
+import { AppointmentDTO } from '../shared/interfaces/appointment';
+import { AppointmentService } from '../shared/services/appointment.service';
 
 @Component({
   selector: 'app-consultar-cita',
@@ -8,36 +10,46 @@ import { environment } from '@env/environment';
   styleUrls: ['./consultar-cita.component.scss']
 })
 export class ConsultarCitaComponent {
-  http = inject(HttpClient);
+  aS = inject(AppointmentService);
 
-  data: any[] = [];
+  data: AppointmentDTO[] = [];
   page = 1;
   total = 0;
   perPage = 10;
   totalRecords = 0;
-  lista2: any[] = [];
+  stateMap: any = {
+    'Scheduled': 'Programada',
+    'Rescheduled': 'Reprogramada',
+    'Canceled': 'Cancelada',
+    'Attended': 'Atendida'
+  };
 
-  // Modifica este método para realizar la consulta de citas
-  getData(page: number = 1) {
-    const url = `${environment.appUrl}appointment`;
-
-    // Puedes añadir parámetros a la URL, por ejemplo, para la paginación
-    const params = {
-      page: page.toString(),
-      perPage: this.perPage.toString()
-    };
-
-    this.http.get(url, { params })
-      .subscribe((response: any) => {
-        this.data = response.data; // Ajusta esto según la estructura de tu respuesta
-        this.total = response.total; // Ajusta esto según la estructura de tu respuesta
-        this.totalRecords = response.totalRecords; // Ajusta esto según la estructura de tu respuesta
-      });
+  ngOnInit(): void {
+    this.getData(this.page);
   }
 
-  // Este método podría ser útil si necesitas cambiar la página desde algún otro lugar
+  getData(page: number = 1) {
+    this.aS.getAllPaginated(page, 5).subscribe(response => {
+      this.data = response.records;
+      this.total = response.totalRecords + 1;
+      console.log(response);
+    });
+  }
+
   pageChanged(page: number) {
     this.page = page;
     this.getData(this.page);
+  }
+
+  getStateName(value: string): string {
+    return this.stateMap[value] || value;
+  }
+
+  editarCita(id: string) {
+
+  }
+
+  eliminarCita(id: string) {
+
   }
 }

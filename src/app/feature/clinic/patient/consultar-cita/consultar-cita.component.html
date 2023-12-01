@@ -4,31 +4,51 @@
       <input type="text" placeholder="Buscar" class="p-2 border rounded" />
     </div>
     <table
-      class="bg-white w-[90%] h-[70%] border-spacing-2 shadow-lg table-fixed"
+      class="bg-white w-[90%] h-[10%] border-spacing-2 shadow-lg table-fixed"
     >
       <thead class="h-[5px] border rounded-xl">
         <tr class="text-left indent-5">
-          <th class="border bg-slate-200 text-left w-[15rem]">Id</th>
+          <th class="border bg-slate-200 text-left w-[8rem] hidden">Id</th>
           <th class="border bg-slate-200">Paciente</th>
           <th class="border bg-slate-200">Descripcion</th>
           <th class="border bg-slate-200">Fecha y Hora</th>
           <th class="border bg-slate-200">Doctor</th>
           <th class="border bg-slate-200">Estado</th>
+          <th class="border bg-slate-200">Acciones</th>
         </tr>
       </thead>
       <tbody class="indent-5 border-spacing-2">
         <tr class="message" *ngIf="data.length === 0">
-          <td class="text-[1.5rem] text-center" colspan="6">
+          <td class="text-[1.5rem] text-center" colspan="7">
             <b>No hay citas agendadas</b>
           </td>
         </tr>
         <tr *ngFor="let item of data | paginate: { itemsPerPage: perPage, currentPage: page, totalItems: total }">
-          <td class="w-[5%] h-[3rem] border border-collapse">{{ item.id }}</td>
-          <td class="w-[15%] border">{{ item.patientId }}</td>
+          <td class="w-[5%] border border-collapse hidden">{{ item.id }}</td>
+          <td class="w-[15%] border text-xs">{{ item.patientId }}</td>
           <td class="w-[20%] border">{{ item.description }}</td>
           <td class="w-[15%] border">{{ item.appointmentStartDate }}</td>
-          <td class="w-[15%] border">{{ item.doctorId }}</td>
-          <td class="w-[15%] border">{{ item.state }}</td>
+          <td class="w-[15%] border text-xs">{{ item.doctorId }}</td>
+          <td class="w-[15%] border" [ngSwitch]="item.state">
+            <ng-container *ngSwitchCase="'Scheduled'">{{ getStateName(item.state) }}</ng-container>
+            <ng-container *ngSwitchCase="'Rescheduled'">{{ getStateName(item.state) }}</ng-container>
+            <ng-container *ngSwitchCase="'Canceled'">{{ getStateName(item.state) }}</ng-container>
+            <ng-container *ngSwitchCase="'Attended'">{{ getStateName(item.state) }}</ng-container>
+            <ng-container *ngSwitchDefault>{{ item.state }}</ng-container>
+          </td>
+
+          <td>
+            <div>
+              <button STYLE="background-color: orange; color: white" class="m-2 rounded p-2" mat-raised-button (click)="editarCita(item.id)">
+                <mat-icon>edit</mat-icon>
+                <span>Editar</span>
+              </button>
+              <button STYLE="background-color: red; color: white" class="m-2 rounded p-2" mat-raised-button (click)="eliminarCita(item.id)">
+                <mat-icon>delete</mat-icon>
+                <span>Eliminar</span>
+              </button>
+            </div>
+          </td>
         </tr>
       </tbody>
 

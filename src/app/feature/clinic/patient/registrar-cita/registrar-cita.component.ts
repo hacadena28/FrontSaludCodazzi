@@ -28,7 +28,7 @@ export class RegistrarCitaComponent implements OnInit {
   formulario!: FormGroup;
   doctors: Doctor[] = [];
   horasIntermedias: string[] = [];
-  typeAppointmentOptions: any[] = [{ value: 'General', name: 'General' }, { value: 'Specialized', name: 'Especializada' }];
+  typeAppointmentOptions: any[] = [{ value: 'Scheduled', name: 'General' }, { value: 'Specialized', name: 'Especializada' }];
 
   http = inject(HttpClient);
   formBuilder = inject(FormBuilder);
@@ -80,7 +80,7 @@ export class RegistrarCitaComponent implements OnInit {
       this.http.post(`${environment.appUrl}appointment`, cita)
         .subscribe(response => {
           console.log('Cita registrada exitosamente:', response);
-          alert('Cita registrada exitosamente'); 
+          alert('Cita registrada exitosamente');
         });
     }
   }
