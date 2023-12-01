@@ -26,7 +26,6 @@ export class EpsManagementComponent implements OnInit {
 
   getData(page: number = 1) {
     this.epsService.getAllPaginated(page, 5).subscribe(response => {
-      debugger
       this.data = response.records;
       this.total = response.totalRecords + 1;
     });
