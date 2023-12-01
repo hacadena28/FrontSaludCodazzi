@@ -10,6 +10,10 @@ import {LayoutAdminComponent} from "./layout-admin/layout-admin.component";
 import {SidebarAdminComponent} from "./sidebar-admin/sidebar-admin.component";
 import {MatIconModule} from "@angular/material/icon";
 import {PageAdminComponent} from "./page-admin/page-admin.component";
+import { DoctorManagementComponent } from './doctor-management/doctor-management.component';
+import { PatientManagementComponent } from './patient-management/patient-management.component';
+import {DoctorService} from "./doctor-management/shared/doctor.service";
+import {UserService} from "./doctor-management/shared/user.service";
 
 
 
@@ -18,7 +22,9 @@ import {PageAdminComponent} from "./page-admin/page-admin.component";
     EpsManagementComponent,
     LayoutAdminComponent,
     SidebarAdminComponent,
-    PageAdminComponent
+    PageAdminComponent,
+    DoctorManagementComponent,
+    PatientManagementComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +34,6 @@ import {PageAdminComponent} from "./page-admin/page-admin.component";
     NgxPaginationModule,
     MatIconModule
   ],
-  providers: [EpsService],
+  providers: [EpsService,DoctorService,UserService],
 })
 export class AdminModule { }

@@ -1,0 +1,55 @@
+<main class="py-[3rem] flex justify-center fondo  h-screen">
+  <article class="w-[90%]  flex justify-center">
+    <table class=" bg-white w-[90%] h-[70%] border-spacing-2 shadow-lg  table-fixed">
+      <thead class="h-[5px] border rounded-xl ">
+      <tr class="text-left indent-5">
+        <th class="border bg-slate-200 " style="width:10%;">firstName</th>
+        <th class="border bg-slate-200 " style="width:10%;">lastName</th>
+        <th class="border bg-slate-200 " style="width:17%;">documentNumber</th>
+        <th class="border bg-slate-200 " style="width:20%;">email</th>
+        <th class="border bg-slate-200 " style="width:15%;">phone</th>
+        <th class="border bg-slate-200 " style="width:15%;">specialization</th>
+        <th class="border bg-slate-200 " style="width:10%;">Opciones</th>
+      </tr>
+      </thead>
+      <tbody class="indent-5 border-spacing-2 ">
+      <tr class="message " *ngIf="data.length === 0">
+        <td class="text-[1.5rem]" colspan="6"><b>No hay Doctores Creadas</b></td>
+      </tr>
+
+
+      <tr
+        *ngFor="let item of data | paginate: { itemsPerPage: perPage, currentPage: page, totalItems: total }">
+        <td>{{item.firstName}}</td>
+        <td>{{item.lastName}}</td>
+        <td>{{item.documentNumber}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.phone}}</td>
+        <td>{{item.specialization}}</td>
+        <td>
+          <button mat-icon-button>
+            <mat-icon aria-label="Visualizar">visibility</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon aria-label="Modificar">edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteDoctor(item.documentNumber)">
+            <mat-icon aria-label="Eliminar">delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td>
+          <pagination-controls
+            [previousLabel]="'Anterior'"
+            [nextLabel]="'Siguiente'"
+            (pageChange)="pageChanged($event)">
+          </pagination-controls>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </article>
+</main>

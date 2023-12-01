@@ -6,21 +6,21 @@
     <div>
         <ul class="flex flex-col flex items-center">
             <li class="h-[5rem]  w-[100%] mx-5">
-                <button class="bt-w  w-[100%] text-[1.1rem]" mat-button>
+                <button (click)="redirectToEps()" class="bt-w  w-[100%] text-[1.1rem]" mat-button>
                     <mat-icon class="icon-w " fontIcon="event"></mat-icon>
                     Eps</button></li>
             <li class="h-[4rem]  w-[100%] justify-start mx-5">
-                <button class=" bt-w w-[100%] h-full" mat-button>
+                <button (click)="redirectToDoctor()" class=" bt-w w-[100%] h-full" mat-button>
                     <mat-icon class="" fontIcon="local_hospital"></mat-icon>
                     Doctores</button></li>
 
           <li class="h-[4rem]  w-[100%] justify-start mx-5">
-            <button class=" bt-w w-[100%] h-full" mat-button>
+            <button (click)="redirectToPatient()" class=" bt-w w-[100%] h-full" mat-button>
               <mat-icon class="" fontIcon="person"></mat-icon>
               Pacientes</button></li>
 
           <li class="h-[4rem]  w-[100%] justify-start mx-5">
-            <button class=" bt-w w-[100%] h-full" mat-button>
+            <button (click)="redirectToAdmin()" class=" bt-w w-[100%] h-full" mat-button>
               <mat-icon class="" fontIcon="supervisor_account"></mat-icon>
               Admin</button></li>
         </ul>
