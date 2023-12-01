@@ -16,10 +16,10 @@ export class LayoutPacienteComponent {
 
 
   navigateRegister(){
-    this.router.navigate(['/paciente/registrar-cita'])
+    this.router.navigate(['clinic/patient/registrar-cita'])
   }
   navigateConsultarCitas(){
-    this.router.navigate(['/paciente/consultar-citas'])
+    this.router.navigate(['clinic/patient/consultar-citas'])
   }
   showModal(state:boolean){}
     state = true;

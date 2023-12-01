@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import {CreateUserPatient} from "../shared/models/create-patient.interface";
 import {CreatePatientService} from "../shared/service/patient.service";
 import {EpsService} from "../../admin/eps-management/shared/service/patient.service";
-import {list} from "postcss";
+import {EpsDto} from "../../admin/eps-management/shared/models/eps-dto.interface";
 
 @Component({
   selector: 'app-register',
@@ -12,21 +12,7 @@ import {list} from "postcss";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit{
-  ListEPS = {
-    isSuccess: "boolean",
-    data: [
-      {
-        id: "664d4c63-9f65-4a0b-bb04-279946fc9c8b",
-        name: "Comeva",
-      },
-      {
-        id: "664d4c63-9f65-4a0b-bb04-279946fc9c8b",
-        name: "Salud Total",
-      }
-    ],
-    message: "string",
-    errors: null
-  };
+  data: EpsDto[] = [];
   formulario!: FormGroup;
   abbreviationOptions: string[] = ['CC', 'TI', 'CE'];
 
@@ -42,7 +28,7 @@ export class RegisterComponent implements OnInit{
 
   private getEps() {
     this.epsService.getAll().subscribe((data) => {
-      this.ListEPS.data = data;
+      this.data = data;
     })
   }
 

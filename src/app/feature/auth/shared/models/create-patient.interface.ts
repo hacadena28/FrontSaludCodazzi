@@ -12,6 +12,12 @@ interface CreatePatient {
   epsId: string;
 }
 
+export interface UserLoginDto {
+  userId: string;
+  documentNumber: string;
+  role: string;
+}
+
 export interface CreateUserPatient{
   password: string;
   patient: CreatePatient;
