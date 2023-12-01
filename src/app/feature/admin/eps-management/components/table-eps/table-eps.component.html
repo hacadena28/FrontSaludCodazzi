@@ -21,11 +21,11 @@
 
     <td>
       <div>
-        <button STYLE="background-color: orange; color: white" mat-raised-button (click)="editarEps(item.id)">
+        <button STYLE="background-color: orange; color: white" mat-raised-button (click)="openModalUpdate(item)">
           <mat-icon>edit</mat-icon>
           <span>Editar</span>
         </button>
-        <button STYLE="background-color: red; color: white" mat-raised-button (click)="eliminarEps(item.id)">
+        <button STYLE="background-color: red; color: white" mat-raised-button (click)="abrirModalConfirmacion(item.id)">
           <mat-icon>delete</mat-icon>
           <span>Eliminar</span>
         </button>

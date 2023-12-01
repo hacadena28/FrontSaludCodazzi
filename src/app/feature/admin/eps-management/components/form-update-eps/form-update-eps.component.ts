@@ -1,44 +1,51 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EpsService} from "../../shared/service/eps.service";
 import {MdbModalRef} from "mdb-angular-ui-kit/modal";
 import {ChangeInfoEpsService} from "../../shared/service/chage-info-eps.service";
+import {EpsDto} from "../../shared/models/eps-dto.interface";
+import {data} from "autoprefixer";
 
 @Component({
   selector: 'app-form-create-eps',
-  templateUrl: './form-create-eps.component.html',
-  styleUrls: ['./form-create-eps.component.scss']
+  templateUrl: './form-update-eps.component.html',
+  styleUrls: ['./form-update-eps.component.scss']
 })
-export class FormCreateEpsComponent {
+export class FormUpdateEpsComponent implements OnInit{
+  @Input() data: any;
   formulario!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private epsService: EpsService,
-    public modalRef: MdbModalRef<FormCreateEpsComponent>,
+    public modalRef: MdbModalRef<FormUpdateEpsComponent>,
     private changeInfoEpsService: ChangeInfoEpsService
   ) {
-    this.builderForms();
   }
+
+  ngOnInit(): void {
+    this.builderForms();
+    }
 
   builderForms() {
     this.formulario = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: [this.data?.name || '' , Validators.required],
     });
   }
 
   close(): void {
+    console.log(this.data);
     const closeMessage = 'Modal closed';
     this.modalRef.close(closeMessage)
   }
 
-  registerEPS() {
+  updateEPS() {
     if (this.formulario.valid) {
-      this.epsService.post(this.formulario.value.name).subscribe(
+      this.epsService.put(this.data.id, this.formulario.value.name).subscribe(
         (result) => {
           this.changeInfoEpsService.emitirEvento("RECARGA_DATA");
           this.close();
-          alert('EPS actualizada exitosamente');
+          alert('EPS actualizada con exito');
         },
         () => {
           alert('No se pudo actualizar la EPS, contacta al administrador');

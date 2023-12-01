@@ -9,6 +9,7 @@ import {ComponentsModule} from "../../components/components.module";
 import {NgxPaginationModule} from "ngx-pagination";
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppointmentService } from './shared/services/appointment.service';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AppointmentService } from './shared/services/appointment.service';
     NgxPaginationModule,
     PatientRoutingModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ],
   providers: [
     DatePipe, AppointmentService

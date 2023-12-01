@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {EpsManagementComponent} from './eps-management/eps-management.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { EpsManagementComponent } from './eps-management/eps-management.component';
 import {AdminRoutingModule} from "./admin-routing.module";
 import {EpsService} from "./eps-management/shared/service/eps.service";
 import {MatPaginatorModule} from "@angular/material/paginator";
@@ -21,6 +21,8 @@ import {MdbModalModule} from "mdb-angular-ui-kit/modal";
 import {MatButtonModule} from "@angular/material/button";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatCardModule} from "@angular/material/card";
+import {FormUpdateEpsComponent} from "./eps-management/components/form-update-eps/form-update-eps.component";
+
 import {TableDoctorComponent} from "./doctor-management/components/table-doctor/table-doctor.component";
 import { FormCreateDoctorComponent } from './doctor-management/components/form-create-doctor/form-create-doctor.component';
 import { FormCreatePatientComponent } from './patient-management/components/form-create-patient/form-create-patient.component';
@@ -36,6 +38,7 @@ import {PatientService} from "./patient-management/shared/Services/patient.servi
     PageAdminComponent,
     TableEpsComponent,
     FormCreateEpsComponent,
+    FormUpdateEpsComponent,
     PageAdminComponent,
     DoctorManagementComponent,
     PatientManagementComponent,
@@ -59,5 +62,4 @@ import {PatientService} from "./patient-management/shared/Services/patient.servi
   ],
   providers: [EpsService, DoctorService,PatientService, UserService,UserService],
 })
-export class AdminModule {
-}
+export class AdminModule { }
