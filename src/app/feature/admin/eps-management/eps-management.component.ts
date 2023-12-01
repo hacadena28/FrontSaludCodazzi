@@ -1,7 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import {MdbModalRef, MdbModalService} from "mdb-angular-ui-kit/modal";
 import {FormCreateEpsComponent} from "./components/form-create-eps/form-create-eps.component";
-import {ConfirmActionComponent} from "../../../shared/components/confirm-action/confirm-action.component";
 
 @Component({
   selector: 'app-eps-management',

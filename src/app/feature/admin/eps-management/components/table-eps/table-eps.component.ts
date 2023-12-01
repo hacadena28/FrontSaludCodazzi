@@ -3,7 +3,6 @@ import {EpsPaginatedDto} from "../../shared/models/eps-paginated-dto.model";
 import {EpsService} from "../../shared/service/eps.service";
 import {ChangeInfoEpsService} from "../../shared/service/chage-info-eps.service";
 import {MdbModalRef, MdbModalService} from "mdb-angular-ui-kit/modal";
-import {FormCreateEpsComponent} from "../form-create-eps/form-create-eps.component";
 import {FormUpdateEpsComponent} from "../form-update-eps/form-update-eps.component";
 import {EpsDto} from "../../shared/models/eps-dto.interface";
 import {ConfirmActionComponent} from "../../../../../shared/components/confirm-action/confirm-action.component";
@@ -18,7 +17,7 @@ export class TableEpsComponent {
   data : EpsPaginatedDto[] = [];
   page = 1;
   total = 0;
-  perPage = 10;
+  perPage = 5;
   totalRecords = 0;
 
   constructor(public epsService: EpsService, private changeInfoEpsService: ChangeInfoEpsService, private modalService: MdbModalService) {
@@ -34,7 +33,7 @@ export class TableEpsComponent {
   getData(page: number = 1) {
     this.epsService.getAllPaginated(page, 5).subscribe(response => {
       this.data = response.records;
-      this.total = response.totalRecords + 1;
+      this.total = response.totalRecords;
     });
   }
   openModalUpdate(eps: EpsDto) {
