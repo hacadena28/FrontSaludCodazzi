@@ -21,6 +21,10 @@ export class LayoutPacienteComponent {
   navigateConsultarCitas(){
     this.router.navigate(['clinic/patient/consultar-citas'])
   }
+
+  navigateLogin(){
+    this.router.navigate(['auth/login'])
+  }
   showModal(state:boolean){}
     state = true;
 }
