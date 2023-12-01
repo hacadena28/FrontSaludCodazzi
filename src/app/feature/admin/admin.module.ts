@@ -6,19 +6,27 @@ import {EpsService} from "./eps-management/shared/service/eps.service";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {NgxPaginationModule} from "ngx-pagination";
+import {LayoutAdminComponent} from "./layout-admin/layout-admin.component";
+import {SidebarAdminComponent} from "./sidebar-admin/sidebar-admin.component";
+import {MatIconModule} from "@angular/material/icon";
+import {PageAdminComponent} from "./page-admin/page-admin.component";
 
 
 
 @NgModule({
   declarations: [
-    EpsManagementComponent
+    EpsManagementComponent,
+    LayoutAdminComponent,
+    SidebarAdminComponent,
+    PageAdminComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MatPaginatorModule,
     MatTableModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatIconModule
   ],
   providers: [EpsService],
 })
