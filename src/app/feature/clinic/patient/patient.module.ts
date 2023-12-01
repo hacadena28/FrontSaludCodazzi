@@ -5,8 +5,8 @@ import { PatientRoutingModule } from './patient-routing.module';
 import { PagePatientComponent } from './page-patient/page-patient.component';
 import { RegistrarCitaComponent } from './registrar-cita/registrar-cita.component';
 import { ConsultarCitaComponent } from './consultar-cita/consultar-cita.component';
-import { ComponentsModule } from "../../components/components.module";
-import { ReactiveFormsModule } from '@angular/forms';
+import {ComponentsModule} from "../../components/components.module";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    NgxPaginationModule,
     PatientRoutingModule,
     ComponentsModule,
     ReactiveFormsModule

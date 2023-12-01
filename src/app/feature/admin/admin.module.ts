@@ -5,6 +5,7 @@ import {AdminRoutingModule} from "./admin-routing.module";
 import {EpsService} from "./eps-management/shared/service/eps.service";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 
@@ -16,7 +17,8 @@ import {MatTableModule} from "@angular/material/table";
     CommonModule,
     AdminRoutingModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    NgxPaginationModule
   ],
   providers: [EpsService],
 })
