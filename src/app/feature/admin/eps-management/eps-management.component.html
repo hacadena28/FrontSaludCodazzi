@@ -1,25 +1,36 @@
 <main class="py-[3rem] flex justify-center fondo  h-screen">
-    <article class="w-[90%]  flex justify-center">
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <!-- Columnas -->
-            <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-              <th mat-header-cell *matHeaderCellDef> {{ column.name }} </th>
-              <td mat-cell *matCellDef="let element"> {{ element[column.field] }} </td>
-            </ng-container>
+  <article class="w-[90%]  flex justify-center">
+    <table class=" bg-white w-[90%] h-[70%] border-spacing-2 shadow-lg  table-fixed">
+      <thead class="h-[5px] border rounded-xl ">
+      <tr class="text-left indent-5">
+        <th class="border  bg-slate-200 ">Id</th>
+        <th class="border bg-slate-200 ">Nombre</th>
+        <th class="border bg-slate-200 ">Estado</th>
+      </tr>
+      </thead>
+      <tbody class="indent-5 border-spacing-2 ">
+      <tr class="message " *ngIf="data.length === 0">
+        <td class="text-[1.5rem]" colspan="6"><b>No hay citas agendadas</b></td>
+      </tr>
 
-            <!-- Configuración del paginador -->
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-
-          <mat-paginator
-            [pageSizeOptions]=pageSizeOptions
-            [length]="totalRecords"
-            [pageSize]="recordsPerPage"
-            [pageIndex]="page"
-            (page)="handlePageEvent($event)"
-            ></mat-paginator>
-          </div>
-       </article>
-    </main>
+      <tr
+        *ngFor="let item of data | paginate: { itemsPerPage: perPage, currentPage: page, totalItems: total }">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.state}}</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td>
+          <pagination-controls
+            [previousLabel]="'Anterior'"
+            [nextLabel]="'Siguiente'"
+            (pageChange)="pageChanged($event)">
+          </pagination-controls>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </article>
+</main>
