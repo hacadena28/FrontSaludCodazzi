@@ -10,6 +10,11 @@ import {LayoutAdminComponent} from "./layout-admin/layout-admin.component";
 import {SidebarAdminComponent} from "./sidebar-admin/sidebar-admin.component";
 import {MatIconModule} from "@angular/material/icon";
 import {PageAdminComponent} from "./page-admin/page-admin.component";
+import { TableEpsComponent } from './eps-management/components/table-eps/table-eps.component';
+import { FormCreateEpsComponent } from './eps-management/components/form-create-eps/form-create-eps.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {MdbModalModule} from "mdb-angular-ui-kit/modal";
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -18,7 +23,9 @@ import {PageAdminComponent} from "./page-admin/page-admin.component";
     EpsManagementComponent,
     LayoutAdminComponent,
     SidebarAdminComponent,
-    PageAdminComponent
+    PageAdminComponent,
+    TableEpsComponent,
+    FormCreateEpsComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +33,10 @@ import {PageAdminComponent} from "./page-admin/page-admin.component";
     MatPaginatorModule,
     MatTableModule,
     NgxPaginationModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    MdbModalModule,
+    MatButtonModule
   ],
   providers: [EpsService],
 })

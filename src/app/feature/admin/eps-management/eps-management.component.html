@@ -1,36 +1,12 @@
-<main class="py-[3rem] flex justify-center fondo  h-screen">
-  <article class="w-[90%]  flex justify-center">
-    <table class=" bg-white w-[90%] h-[70%] border-spacing-2 shadow-lg  table-fixed">
-      <thead class="h-[5px] border rounded-xl ">
-      <tr class="text-left indent-5">
-        <th class="border  bg-slate-200 ">Id</th>
-        <th class="border bg-slate-200 ">Nombre</th>
-        <th class="border bg-slate-200 ">Estado</th>
-      </tr>
-      </thead>
-      <tbody class="indent-5 border-spacing-2 ">
-      <tr class="message " *ngIf="data.length === 0">
-        <td class="text-[1.5rem]" colspan="6"><b>No hay Eps Creadas</b></td>
-      </tr>
-
-      <tr
-        *ngFor="let item of data | paginate: { itemsPerPage: perPage, currentPage: page, totalItems: total }">
-        <td>{{item.id}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.state}}</td>
-      </tr>
-      </tbody>
-      <tfoot>
-      <tr>
-        <td>
-          <pagination-controls
-            [previousLabel]="'Anterior'"
-            [nextLabel]="'Siguiente'"
-            (pageChange)="pageChanged($event)">
-          </pagination-controls>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
+<main class="py-[3rem] flex fondo h-screen">
+  <article class="w-[90%] flex flex-row justify-between items-center">
+    <div>
+      <button class="btn btn-xs btn-primary text-whites" (click)="openModal()">
+        <mat-icon class="" fontIcon="local_hospital"></mat-icon> Crear eps
+      </button>
+    </div>
+    <app-table-eps class="ml-2"></app-table-eps>
   </article>
 </main>
+
+
