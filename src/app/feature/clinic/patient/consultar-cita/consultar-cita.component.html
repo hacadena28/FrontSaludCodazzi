@@ -13,7 +13,7 @@
         </thead>
         <tbody class="indent-5 border-spacing-2 ">
             <tr class="message " *ngIf="lista2.length === 0">
-                <td class="text-[1.5rem]" colspan="6"><b>No hay citas agendadas</b></td>
+                <td class="text-[1.5rem] text-center" colspan="6"><b>No hay citas agendadas</b></td>
             </tr>
             <tr *ngFor="let li of lista2">
             <td class="w-[5%] h-[3rem] border border-collapse">{{li.id}}</td>
@@ -22,12 +22,12 @@
             <td class="w-[20%] border">{{li.description}}</td>
             <td class="w-[15%] border">{{li.hourCita}}</td>
             <td class="w-[15%] border"><article class="flex w-full items-center  justify-around">
-                <div class="w-[80%]">{{li.state}}</div> <div 
+                <div class="w-[80%]">{{li.state}}</div> <div
                 [ngClass]="{'aprobada': li.state === 'Aprobada','pendiente': li.state === 'Pendiente','rechazada': li.state === 'Rechazada'}">
             </div></article></td>
             </tr>
         </tbody>
-       
+
     </table>
    </article>
 </main>

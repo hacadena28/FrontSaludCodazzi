@@ -3,16 +3,20 @@
     class="border w-[50%] h-[70%] p-8 flex flex-col justify-center gap-8 items-center"
   >
     <h1 class="text-4xl font-bold">Registra tu cita</h1>
-    <form action="" class="flex flex-wrap w-full justify-between">
+    <form
+      [formGroup]="formulario"
+      class="flex flex-wrap w-full justify-between"
+      (ngSubmit)="registrarCita()"
+    >
       <div class="w-[48%]">
         <label for="type" class="block text-sm text-gray-700 font-bold"
           >Tipo de Cita</label
         >
         <select
-          formControlName="abbreviation"
+          formControlName="type"
           class="border-[2px] w-[48%] border-solid rounded-md h-[2.4rem] indent-3"
-          name="abbreviation"
-          id="abbreviation"
+          name="type"
+          id="type"
         >
           <option selected disabled>Seleccione</option>
           <option
@@ -28,6 +32,7 @@
           >Fecha</label
         >
         <input
+          formControlName="appointmentStartDate"
           id="fecha"
           name="fecha"
           class="border w-full h-10 rounded-md px-3"
@@ -41,6 +46,7 @@
           >Doctor</label
         >
         <select
+          formControlName="doctorId"
           id="doctor"
           name="doctor"
           class="border w-full h-10 rounded-md px-3"
@@ -57,6 +63,7 @@
           >Descripción</label
         >
         <textarea
+          formControlName="description"
           id="descripcion"
           name="descripcion"
           class="border w-full h-20 rounded-md px-2 py-2 resize-none"
@@ -66,7 +73,7 @@
       <div class="w-full mb-4">
         <button
           type="button"
-          onclick="registrarCita()"
+          (click)="registrarCita()"
           class="bg-blue-500 text-white px-4 py-2 rounded-md"
         >
           Registrar Cita
