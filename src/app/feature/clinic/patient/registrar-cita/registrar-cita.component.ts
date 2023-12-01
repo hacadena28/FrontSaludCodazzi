@@ -27,7 +27,7 @@ export class RegistrarCitaComponent implements OnInit {
   doctors: Doctor[] = [];
 
   horasIntermedias: string[] = [];
-  typeAppointmentOptions: string[] = ['General', 'Especializada'];
+  typeAppointmentOptions: any[] = [{value: 'General', name:'General'}, {value: 'Specialized', name:'Especializada'}];
 
   constructor(private http: HttpClient, private formBuilder: FormBuilder) {
     this.builderForm();
