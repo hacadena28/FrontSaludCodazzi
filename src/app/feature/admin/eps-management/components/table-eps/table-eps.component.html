@@ -1,49 +1,47 @@
-<main class="py-[3rem] flex justify-center fondo  h-screen">
-  <article class="w-[90%]  flex justify-center">
-    <table class="bg-white w-[90%] h-[70%] border-spacing-2 shadow-lg  table-fixed">
-      <thead class="h-[5px] border rounded-xl ">
-      <tr class="text-left indent-5">
-        <th class="border  bg-slate-200">Id</th>
-        <th class="border bg-slate-200">Nombre</th>
-        <th class="border bg-slate-200">Estado</th>
-        <th class="border bg-slate-200">Acción</th>
-      </tr>
-      </thead>
-      <tbody class="indent-5 border-spacing-2">
-      <tr class="message" *ngIf="data.length === 0">
-        <td class="text-[1.5rem]" colspan="7"><b>No hay Eps Creadas</b></td>
-      </tr>
+<table class="bg-white w-[90%] h-[40%] border-spacing-2 shadow-lg  table-fixed">
+  <thead class="h-[5px] border rounded-xl ">
+  <tr class="text-left indent-5">
+    <th class="border  bg-slate-200">Id</th>
+    <th class="border bg-slate-200">Nombre</th>
+    <th class="border bg-slate-200">Estado</th>
+    <th class="border bg-slate-200">Acción</th>
+  </tr>
+  </thead>
+  <tbody class="indent-5 border-spacing-2">
+  <tr class="message" *ngIf="data.length === 0">
+    <td class="text-[1.5rem]" colspan="7"><b>No hay Eps Creadas</b></td>
+  </tr>
 
-      <tr *ngFor="let item of data | paginate: { itemsPerPage: perPage, currentPage: page, totalItems: total }">
-        <td>{{item.id}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.state}}</td>
-        <td>
-          <div>
-            <button STYLE="background-color: orange; color: white" mat-raised-button (click)="editarEps(item.id)">
-              <mat-icon>edit</mat-icon>
-              <span>Editar</span>
-            </button>
-            <button STYLE="background-color: red; color: white" mat-raised-button (click)="eliminarEps(item.id)">
-              <mat-icon>delete</mat-icon>
-              <span>Eliminar</span>
-            </button>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-      <tfoot>
-      <tr>
-        <td>
-          <pagination-controls
-            [previousLabel]="'Anterior'"
-            [nextLabel]="'Siguiente'"
-            (pageChange)="pageChanged($event)">
-          </pagination-controls>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
-  </article>
-</main>
+  <tr *ngFor="let item of data | paginate: { itemsPerPage: perPage, currentPage: page, totalItems: total }">
+    <td>{{item.id}}</td>
+    <td>{{item.name}}</td>
+    <td>
+      <span class="badge text-xl badge-primary">{{ item.state == "Active" ? 'Activo' : 'Inactivo' }}</span>
+    </td>
 
+    <td>
+      <div>
+        <button STYLE="background-color: orange; color: white" mat-raised-button (click)="editarEps(item.id)">
+          <mat-icon>edit</mat-icon>
+          <span>Editar</span>
+        </button>
+        <button STYLE="background-color: red; color: white" mat-raised-button (click)="eliminarEps(item.id)">
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar</span>
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td>
+      <pagination-controls
+        [previousLabel]="'Anterior'"
+        [nextLabel]="'Siguiente'"
+        (pageChange)="pageChanged($event)">
+      </pagination-controls>
+    </td>
+  </tr>
+  </tfoot>
+</table>
