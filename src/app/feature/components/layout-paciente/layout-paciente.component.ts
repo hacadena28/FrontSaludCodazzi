@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,9 +10,7 @@ export class LayoutPacienteComponent {
 
 
 
-  constructor(private router:Router) {
-
-  }
+  router = inject(Router);
 
 
   navigateRegister(){
