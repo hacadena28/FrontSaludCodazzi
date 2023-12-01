@@ -5,8 +5,8 @@ export class UserModelDto {
     personId: string
   ) {
     this.id = id;
-    this.role = id;
-    this.personId = id;
+    this.role = role;
+    this.personId = personId;
   }
 
   id: string;
