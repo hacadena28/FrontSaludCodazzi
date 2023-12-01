@@ -7,6 +7,7 @@ import { RegistrarCitaComponent } from './registrar-cita/registrar-cita.componen
 import { ConsultarCitaComponent } from './consultar-cita/consultar-cita.component';
 import {ComponentsModule} from "../../components/components.module";
 import {NgxPaginationModule} from "ngx-pagination";
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
