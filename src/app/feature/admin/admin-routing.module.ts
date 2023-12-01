@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import {EpsManagementComponent} from "./eps-management/eps-management.component";
 
 const routes: Routes = [
-  { path: '', component: EpsManagementComponent },
   { path: 'eps', component: EpsManagementComponent }
 ];
 
