@@ -6,6 +6,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import {CreatePatientService} from "./shared/service/patient.service";
+import {EpsService} from "../admin/eps-management/shared/service/patient.service";
 
 
 @NgModule({
@@ -18,6 +20,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     AuthRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [CreatePatientService, EpsService],
 })
 export class AuthModule { }

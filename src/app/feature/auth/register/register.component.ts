@@ -1,27 +1,28 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {CreateUserPatient} from "../shared/models/create-patient.interface";
+import {CreatePatientService} from "../shared/service/patient.service";
+import {EpsService} from "../../admin/eps-management/shared/service/patient.service";
+import {list} from "postcss";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit{
   ListEPS = {
     isSuccess: "boolean",
     data: [
       {
-        id: 12,
-        name: "string",
-        regime: "string"
+        id: "664d4c63-9f65-4a0b-bb04-279946fc9c8b",
+        name: "Comeva",
       },
       {
-        id: 12,
-        name: "string",
-        regime: "string"
+        id: "664d4c63-9f65-4a0b-bb04-279946fc9c8b",
+        name: "Salud Total",
       }
-
     ],
     message: "string",
     errors: null
@@ -29,18 +30,24 @@ export class RegisterComponent {
   formulario!: FormGroup;
   abbreviationOptions: string[] = ['CC', 'TI', 'CE'];
 
-  constructor( private formBuilder: FormBuilder, private navegador: Router) {
+  constructor(
+    protected createPatientService: CreatePatientService,
+    protected epsService: EpsService,
+    private formBuilder: FormBuilder,
+    private navegador: Router
+  ) {
     this.builderForms();
 
   }
 
   private getEps() {
-   
+    this.epsService.getAll().subscribe((data) => {
+      this.ListEPS.data = data;
+    })
   }
 
   ngOnInit(): void {
     this.getEps();
-
   }
 
   builderForms() {
@@ -66,6 +73,29 @@ export class RegisterComponent {
   }
 
   registerPatient() {
-    
+    if (this.formulario.valid) {
+      const createUserPatient: CreateUserPatient = {
+        password: this.formulario.value.password,
+        patient: {
+          firstName: this.formulario.value.firstname,
+          secondName: this.formulario.value.secondName,
+          lastName: this.formulario.value.firstLasName,
+          secondLastName: this.formulario.value.secondLastName,
+          documentType: "IdentificationCard",
+          documentNumber: this.formulario.value.number,
+          email: this.formulario.value.email,
+          phone: this.formulario.value.number,
+          address: this.formulario.value.address,
+          birthdate: new Date(),
+          epsId: this.formulario.value.epesId
+        }
+      };
+      this.createPatientService.create(createUserPatient).subscribe((result) => {
+        alert("Paciente creado existosamente");
+        this.navegador.navigate(["auth/login"])
+      }, () => {
+        alert("No se pudo crear el paciente, contacte con el administrador");
+      });
+    }
   }
 }

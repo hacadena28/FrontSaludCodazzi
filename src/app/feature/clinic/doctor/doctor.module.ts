@@ -3,19 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { DoctorRoutingModule } from './doctor-routing.module';
 import { PageDoctorComponent } from './page-doctor/page-doctor.component';
-import { ComponentsModule } from '../components/components.module';
 import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
+import {LayoutDoctorComponent} from "./layout-doctor/layout-doctor.component";
+import {ComponentsModule} from "../../components/components.module";
 
 
 @NgModule({
   declarations: [
     PageDoctorComponent,
-    ConsultarAgendaComponent
+    ConsultarAgendaComponent,
+    LayoutDoctorComponent
   ],
   imports: [
     CommonModule,
     DoctorRoutingModule,
-    ComponentsModule
+    ComponentsModule,
   ]
 })
 export class DoctorModule { }

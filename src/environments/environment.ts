@@ -3,5 +3,5 @@ export const environment = {
   appConfig: 'dev',
   pathConfig: './assets/config',
   apiUrl: '/renovables',
-  appUrl: 'https://apiqr.azure-api.net/api/v1/',
+  appUrl: 'https://localhost:5001/api/',
 };

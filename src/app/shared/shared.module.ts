@@ -4,8 +4,6 @@ import { CardComponent } from './components/card/card.component';
 import { MatCardModule } from "@angular/material/card";
 import { ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
     declarations: [
         CardComponent,
