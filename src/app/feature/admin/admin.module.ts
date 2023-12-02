@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { EpsManagementComponent } from './eps-management/eps-management.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {EpsManagementComponent} from './eps-management/eps-management.component';
 import {AdminRoutingModule} from "./admin-routing.module";
 import {EpsService} from "./eps-management/shared/service/eps.service";
 import {MatPaginatorModule} from "@angular/material/paginator";
@@ -24,59 +24,77 @@ import {MatCardModule} from "@angular/material/card";
 import {FormUpdateEpsComponent} from "./eps-management/components/form-update-eps/form-update-eps.component";
 
 import {TableDoctorComponent} from "./doctor-management/components/table-doctor/table-doctor.component";
-import { FormCreateDoctorComponent } from './doctor-management/components/form-create-doctor/form-create-doctor.component';
-import { FormCreatePatientComponent } from './patient-management/components/form-create-patient/form-create-patient.component';
-import { TablePatientComponent } from './patient-management/components/table-patient/table-patient.component';
+import {
+    FormCreateDoctorComponent
+} from './doctor-management/components/form-create-doctor/form-create-doctor.component';
+import {
+    FormCreatePatientComponent
+} from './patient-management/components/form-create-patient/form-create-patient.component';
+import {TablePatientComponent} from './patient-management/components/table-patient/table-patient.component';
 import {PatientService} from "./patient-management/shared/Services/patient.service";
-import { FormUpdateDoctorComponent } from './doctor-management/components/form-update-doctor/form-update-doctor.component';
-import { FormUpdatePatientComponent } from './patient-management/components/form-update-patient/form-update-patient.component';
+import {
+    FormUpdateDoctorComponent
+} from './doctor-management/components/form-update-doctor/form-update-doctor.component';
+import {
+    FormUpdatePatientComponent
+} from './patient-management/components/form-update-patient/form-update-patient.component';
 import {UserPatientService} from "./patient-management/shared/Services/user-patient.service";
-import { AdminManagementComponent } from './admin-management/admin-management.component';
-import { UserManagementComponent } from './user-management/user-management.component';
-import { FormUpdateAdminComponent } from './admin-management/components/form-update-admin/form-update-admin.component';
-import { FormCreateAdminComponent } from './admin-management/components/form-create-admin/form-create-admin.component';
-import { TableAdminComponent } from './admin-management/components/table-admin/table-admin.component';
+import {AdminManagementComponent} from './admin-management/admin-management.component';
+import {UserManagementComponent} from './user-management/user-management.component';
+import {FormUpdateAdminComponent} from './admin-management/components/form-update-admin/form-update-admin.component';
+import {FormCreateAdminComponent} from './admin-management/components/form-create-admin/form-create-admin.component';
+import {TableAdminComponent} from './admin-management/components/table-admin/table-admin.component';
 import {UserAdminService} from "./admin-management/shared/Services/user-admin.service";
 import {AdminService} from "./admin-management/shared/Services/admin.service";
+import {MedicalHistoryService} from "../clinic/doctor/consultar-medical-history/Services/medical-history.service";
 
 
 @NgModule({
-  declarations: [
-    EpsManagementComponent,
-    LayoutAdminComponent,
-    SidebarAdminComponent,
-    PageAdminComponent,
-    TableEpsComponent,
-    FormCreateEpsComponent,
-    FormUpdateEpsComponent,
-    PageAdminComponent,
-    DoctorManagementComponent,
-    PatientManagementComponent,
-    TableDoctorComponent,
-    FormCreateDoctorComponent,
-    FormCreatePatientComponent,
-    TablePatientComponent,
-    FormUpdateDoctorComponent,
-    FormUpdatePatientComponent,
-    AdminManagementComponent,
-    UserManagementComponent,
-    FormUpdateAdminComponent,
-    FormCreateAdminComponent,
-    TableAdminComponent
-  ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    MatPaginatorModule,
-    MatTableModule,
-    NgxPaginationModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MdbModalModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatCardModule
-  ],
-  providers: [EpsService, DoctorService,PatientService,AdminService, UserService,UserPatientService,UserAdminService],
+    declarations: [
+        EpsManagementComponent,
+        LayoutAdminComponent,
+        SidebarAdminComponent,
+        PageAdminComponent,
+        TableEpsComponent,
+        FormCreateEpsComponent,
+        FormUpdateEpsComponent,
+        PageAdminComponent,
+        DoctorManagementComponent,
+        PatientManagementComponent,
+        TableDoctorComponent,
+        FormCreateDoctorComponent,
+        FormCreatePatientComponent,
+        TablePatientComponent,
+        FormUpdateDoctorComponent,
+        FormUpdatePatientComponent,
+        AdminManagementComponent,
+        UserManagementComponent,
+        FormUpdateAdminComponent,
+        FormCreateAdminComponent,
+        TableAdminComponent
+    ],
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        MatPaginatorModule,
+        MatTableModule,
+        NgxPaginationModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MdbModalModule,
+        MatButtonModule,
+        MatChipsModule,
+        MatCardModule
+    ],
+    providers: [
+        EpsService,
+        DoctorService,
+        PatientService,
+        AdminService,
+        UserService,
+        UserPatientService,
+        UserAdminService,
+        MedicalHistoryService],
 })
-export class AdminModule { }
+export class AdminModule {
+}

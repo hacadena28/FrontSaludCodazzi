@@ -1,48 +1,35 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MedicalHistoryDto} from "./models/medicalHistory-dto.interface";
+
+import {MedicalHistoryPaginatedDto} from "./models/medicalHistory-paginated-dto.model";
+import {MedicalHistoryService} from "./Services/medical-history.service";
 
 @Component({
-  selector: 'app-consultar-medical-history',
-  templateUrl: './consultar-medical-history.component.html',
-  styleUrls: ['./consultar-medical-history.component.scss']
+    selector: 'app-consultar-medical-history',
+    templateUrl: './consultar-medical-history.component.html',
+    styleUrls: ['./consultar-medical-history.component.scss']
 })
-export class ConsultarMedicalHistoryComponent {
+export class ConsultarMedicalHistoryComponent implements OnInit {
+
+    constructor(private medicalHistory: MedicalHistoryService) {
+    }
+
+    data: MedicalHistoryPaginatedDto[] = [];
+    page = 1;
+    total = 0;
+    perPage = 10;
+    totalRecords = 0;
 
 
+    ngOnInit(): void {
+        this.getData("8831498e-a968-44e9-d721-08dbf2635302")
+    }
 
-  listaHistorial: any[] = [
-    {
-      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "date": "2023-12-02T18:36:28.822Z",
-      "description": "string",
-      "diagnosis": "string",
-      "treatment": "string",
-      "patientId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "patiendFullName": "heli Cadena"
-    },{
-      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "date": "2023-12-02T18:36:28.822Z",
-      "description": "string",
-      "diagnosis": "string",
-      "treatment": "string",
-      "patientId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "patiendFullName": "heli Cadena"
-    },{
-      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "date": "2023-12-02T18:36:28.822Z",
-      "description": "string",
-      "diagnosis": "string",
-      "treatment": "string",
-      "patientId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "patiendFullName": "heli Cadena"
-    },{
-      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "date": "2023-12-02T18:36:28.822Z",
-      "description": "string",
-      "diagnosis": "string",
-      "treatment": "string",
-      "patientId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "patiendFullName": "heli Cadena"
-    },
-  ];
-
+    getData(documentNumber: string) {
+        this.medicalHistory.getById(documentNumber).subscribe(response => {
+            this.data = response.records;
+            this.total = response.totalRecords;
+            console.log(response);
+        });
+    }
 }

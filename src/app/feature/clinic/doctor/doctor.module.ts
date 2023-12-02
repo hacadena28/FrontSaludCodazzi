@@ -15,6 +15,7 @@ import { AgregarHistoriaClinicaComponent } from './agregar-historia-clinica/agre
 import {ReactiveFormsModule} from "@angular/forms";
 import { ConsultarMedicalHistoryComponent } from './consultar-medical-history/consultar-medical-history.component';
 import {SharedModule} from "../../../shared/shared.module";
+import {MedicalHistoryService} from "./consultar-medical-history/Services/medical-history.service";
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import {SharedModule} from "../../../shared/shared.module";
     PageDoctorComponent,
     ConsultarAgendaComponent,
     LayoutDoctorComponent,
-    AgregarHistoriaClinicaComponent
+    AgregarHistoriaClinicaComponent,
     LayoutDoctorComponent,
     ConsultarMedicalHistoryComponent,
   ],
@@ -33,10 +34,11 @@ import {SharedModule} from "../../../shared/shared.module";
     MatIconModule,
     NgxPaginationModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [AppointmentService, MdbModalService, DatePipe,
-    SharedModule
+    SharedModule,MedicalHistoryService
   ]
 })
 export class DoctorModule { }

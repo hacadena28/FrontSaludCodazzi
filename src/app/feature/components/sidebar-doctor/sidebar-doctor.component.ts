@@ -14,6 +14,7 @@ export class SidebarDoctorComponent {
   }
 
   redirectToAgenda(): void {
+    console.log("navegando")
     this.router.navigate(['clinic/doctor/agenda']);
   }
   redirectToHistorial(): void {
