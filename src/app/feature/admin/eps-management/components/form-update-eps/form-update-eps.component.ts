@@ -24,10 +24,12 @@ export class FormUpdateEpsComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
     this.builderForms();
     }
 
   builderForms() {
+
     this.formulario = this.formBuilder.group({
       name: [this.data?.name || '' , Validators.required],
     });
@@ -40,6 +42,7 @@ export class FormUpdateEpsComponent implements OnInit{
   }
 
   updateEPS() {
+
     if (this.formulario.valid) {
       this.epsService.put(this.data.id, this.formulario.value.name).subscribe(
         (result) => {
@@ -53,4 +56,5 @@ export class FormUpdateEpsComponent implements OnInit{
       );
     }
   }
+
 }

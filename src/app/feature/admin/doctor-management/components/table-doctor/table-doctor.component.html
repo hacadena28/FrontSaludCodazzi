@@ -24,12 +24,11 @@
     <td>{{item.specialization}}</td>
     <td>
       <div>
-        <button STYLE="background-color: orange; color: white" mat-raised-button>
+        <button STYLE="background-color: orange; color: white" mat-raised-button (click)="openModalUpdate(item)">
           <mat-icon>edit</mat-icon>
           <span>Editar</span>
         </button>
-        <button STYLE="background-color: red; color: white" mat-raised-button
-                (click)="deleteDoctor(item.documentNumber)">
+        <button STYLE="background-color: red; color: white" mat-raised-button (click)="abrirModalConfirmacion(item.documentNumber)">
           <mat-icon>delete</mat-icon>
           <span>Eliminar</span>
         </button>

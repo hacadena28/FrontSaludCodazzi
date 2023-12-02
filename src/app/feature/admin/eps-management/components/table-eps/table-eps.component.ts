@@ -23,6 +23,7 @@ export class TableEpsComponent {
 
   constructor(public epsService: EpsService, private changeInfoEpsService: ChangeInfoEpsService, private modalService: MdbModalService) {
     this.changeInfoEpsService.evento.subscribe((data) => {
+      debugger
       this.getData();
     });
   }

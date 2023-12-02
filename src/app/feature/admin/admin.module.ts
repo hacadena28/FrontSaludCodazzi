@@ -28,6 +28,8 @@ import { FormCreateDoctorComponent } from './doctor-management/components/form-c
 import { FormCreatePatientComponent } from './patient-management/components/form-create-patient/form-create-patient.component';
 import { TablePatientComponent } from './patient-management/components/table-patient/table-patient.component';
 import {PatientService} from "./patient-management/shared/Services/patient.service";
+import { FormUpdateDoctorComponent } from './doctor-management/components/form-update-doctor/form-update-doctor.component';
+import { FormUpdatePatientComponent } from './patient-management/components/form-update-patient/form-update-patient.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import {PatientService} from "./patient-management/shared/Services/patient.servi
     TableDoctorComponent,
     FormCreateDoctorComponent,
     FormCreatePatientComponent,
-    TablePatientComponent
+    TablePatientComponent,
+    FormUpdateDoctorComponent,
+    FormUpdatePatientComponent
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import {HttpService} from "@core/services/http.service";
 import {environment} from "@env/environment";
 import {UserDto} from "../models/user-dto.interface";
 import {UserModelDto} from "../models/user-dto.model";
+import {Doctor, DoctorRegistration} from "../models/doctor-registration";
 
 
 @Injectable()
@@ -40,8 +41,23 @@ export class UserService {
       );
   }
 
-  post(name: string): Observable<void> {
-    return this.http.doPost<any, void>(`${environment.appUrl}user`, {name: name});
+  post(doctorRegistration: DoctorRegistration): Observable<void> {
+    return this.http.doPost<any, void>(`${environment.appUrl}user/doctor`, {
+      "password": doctorRegistration.password,
+      "doctor": {
+        "firstName": doctorRegistration.doctor.firstName,
+        "secondName": doctorRegistration.doctor.secondName,
+        "lastName": doctorRegistration.doctor.lastName,
+        "secondLastName": doctorRegistration.doctor.secondLastName,
+        "documentType": doctorRegistration.doctor.documentType,
+        "documentNumber": doctorRegistration.doctor.documentNumber,
+        "email": doctorRegistration.doctor.email,
+        "phone": doctorRegistration.doctor.phone,
+        "address": doctorRegistration.doctor.address,
+        "birthdate": doctorRegistration.doctor.birthdate,
+        "specialization": doctorRegistration.doctor.specialization
+      }
+    });
   }
 
   put(id: string, newName: string): Observable<void> {

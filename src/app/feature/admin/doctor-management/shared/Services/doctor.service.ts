@@ -4,6 +4,7 @@ import {HttpService} from "@core/services/http.service";
 import {environment} from "@env/environment";
 import {DoctorDto} from "../models/doctor-dto.interface";
 import {DoctorPaginatedDto, Paginated} from '../models/doctor-paginated-dto.model';
+import {DoctorUpdate} from "../models/doctor-update";
 
 
 @Injectable()
@@ -80,8 +81,8 @@ export class DoctorService {
     return this.http.doPost<any, void>(`${environment.appUrl}doctor`, {name: name});
   }
 
-  put(id: string, newName: string): Observable<void> {
-    return this.http.doPut<any, void>(`${environment.appUrl}doctor/${id}`, {id: id, newName: newName});
+  put(id: string, doctorUpdate: DoctorUpdate): Observable<void> {
+    return this.http.doPut<any, void>(`${environment.appUrl}doctor/${id}`, doctorUpdate);
   }
 
   delete(id: string): Observable<void> {

@@ -1,27 +1,48 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MdbModalRef} from "mdb-angular-ui-kit/modal";
 import {DoctorService} from "../../shared/Services/doctor.service";
+import {TypeDocument} from "../../shared/enums/type-document";
+import {Specialization} from "../../shared/enums/specialization";
+import {UserService} from "../../shared/Services/user.service";
+import {ChangeInfoDoctorService} from '../../shared/Services/change-info-doctor.service';
 
- @Component({
-   selector: 'app-form-create-doctor',
-   templateUrl: './form-create-doctor.component.html',
-   styleUrls: ['./form-create-doctor.component.scss']
- })
- export class FormCreateDoctorComponent {
+@Component({
+  selector: 'app-form-create-doctor',
+  templateUrl: './form-create-doctor.component.html',
+  styleUrls: ['./form-create-doctor.component.scss']
+})
+export class FormCreateDoctorComponent {
   formulario!: FormGroup;
+  documentTypes = Object.entries(TypeDocument).map(([key, value]) => ({key, value}));
+  specialization = Object.values(Specialization);
 
   constructor(
     private formBuilder: FormBuilder,
     private doctorService: DoctorService,
-    public modalRef: MdbModalRef<FormCreateDoctorComponent>
+    private userService: UserService,
+    public modalRef: MdbModalRef<FormCreateDoctorComponent>,
+    private changeInfoDoctorService: ChangeInfoDoctorService,
   ) {
     this.builderForms();
   }
 
   builderForms() {
     this.formulario = this.formBuilder.group({
-      name: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.maxLength(50)]],
+      secondName: ['', [Validators.required, Validators.maxLength(50)]],
+      lastName: ['', [Validators.required, Validators.maxLength(50)]],
+      secondLastName: ['', [Validators.required, Validators.maxLength(50)]],
+      documentType: ['', Validators.required],
+      documentNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10), Validators.maxLength(15)]],// Ajustar el rango según el formato deseado
+      address: ['', [Validators.required, Validators.maxLength(100)]],
+      birthdate: ['', Validators.required],
+      specialization: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+
     });
   }
 
@@ -30,17 +51,39 @@ import {DoctorService} from "../../shared/Services/doctor.service";
     this.modalRef.close(closeMessage)
   }
 
+
   registerDoctor() {
     if (this.formulario.valid) {
-      this.doctorService.post(this.formulario.value.name).subscribe(
+      const doctorRegistration = {
+        password: this.formulario.value.password,
+        doctor: {
+          firstName: this.formulario.value.firstName,
+          secondName: this.formulario.value.secondName,
+          lastName: this.formulario.value.lastName,
+          secondLastName: this.formulario.value.secondLastName,
+          documentType: this.formulario.value.documentType,
+          documentNumber: this.formulario.value.documentNumber.toString(),
+          email: this.formulario.value.email,
+          phone: this.formulario.value.phone.toString(),
+          address: this.formulario.value.address,
+          birthdate: this.formulario.value.birthdate,
+          specialization: this.formulario.value.specialization
+        }
+      };
+      this.userService.post(doctorRegistration).subscribe(
         (result) => {
-          alert('Doctor creada exitosamente');
+          this.changeInfoDoctorService.emitirEvento("RECARGA_DATA");
+          this.close();
+          alert('Doctor creado exitosamente');
+          this.close(); // Cerrar el modal después de la creación exitosa del doctor
         },
         () => {
-          alert('No se pudo crear la Doctor, contacta al administrador');
+          alert('No se pudo crear el doctor, contacta al administrador');
         }
       );
+    } else {
+      alert('Por favor, completa correctamente todos los campos del formulario');
     }
+
   }
 }
-
