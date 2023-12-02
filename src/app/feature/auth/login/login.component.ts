@@ -52,15 +52,7 @@ export class LoginComponent implements OnInit {
       this.redirect(result.role);
       localStorage.setItem('user', JSON.stringify(result));
     }, (error) => {
-      console.log("Credenciales erroneas");
+      alert("Credenciales erroneas");
     })
-  }
-
-  logout() {
-    // Implementar el logout si es necesario
-  }
-
-  getData() {
-    // Implementar la obtención de datos si es necesario
   }
 }
