@@ -29,7 +29,6 @@ import {FormUpdateDoctorComponent} from "../form-update-doctor/form-update-docto
   totalRecords = 0;
   constructor(public doctorService: DoctorService, public userService: UserService, private changeInfoDoctorService: ChangeInfoDoctorService, private modalService: MdbModalService) {
     this.changeInfoDoctorService.evento.subscribe((data) => {
-      debugger
       this.getData();
     });
   }

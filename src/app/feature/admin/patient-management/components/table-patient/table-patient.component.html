@@ -21,18 +21,20 @@
     <td>{{item.documentNumber}}</td>
     <td>{{item.email}}</td>
     <td>{{item.phone}}</td>
-    <td>{{item.epsId}}</td>
+<!--    <td>{{item.epsId}}</td>-->
+    <td>Cosalud</td>
     <td>
       <div>
-        <button STYLE="background-color: orange; color: white" mat-raised-button>
-          <mat-icon>edit</mat-icon>
-          <span>Editar</span>
-        </button>
-        <button STYLE="background-color: red; color: white" mat-raised-button
-                (click)="deletePatient(item.documentNumber)">
-          <mat-icon>delete</mat-icon>
-          <span>Eliminar</span>
-        </button>
+        <div>
+          <button STYLE="background-color: orange; color: white" mat-raised-button (click)="openModalUpdate(item)">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button STYLE="background-color: red; color: white" mat-raised-button (click)="abrirModalConfirmacion(item.documentNumber)">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar</span>
+          </button>
+        </div>
       </div>
     </td>
   </tr>

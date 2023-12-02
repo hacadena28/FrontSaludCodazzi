@@ -1,0 +1,47 @@
+.card {
+  width: 800px;
+  padding: 40px;
+  margin: 20px;
+  border: 0px;
+}
+
+.card h2 {
+  margin-bottom: 10px;
+  border-bottom: solid 1px #807f7f75;
+}
+
+.card h3 {
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.card h4 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.card p {
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: space-between;
+  border-top: solid 1px #807f7f75;
+  margin-top: 20px;
+}
+
+.card-buttons button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card-buttons button:hover {
+  background-color: #ddd;
+}
+.conten{
+  overflow-y: hidden;
+}

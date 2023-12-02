@@ -4,6 +4,8 @@ import {EpsManagementComponent} from "./eps-management/eps-management.component"
 import {PageAdminComponent} from "./page-admin/page-admin.component";
 import {DoctorManagementComponent} from "./doctor-management/doctor-management.component";
 import {PatientManagementComponent} from "./patient-management/patient-management.component";
+import {AdminManagementComponent} from "./admin-management/admin-management.component";
+import {UserManagementComponent} from "./user-management/user-management.component";
 
 const routes: Routes = [
   {
@@ -13,6 +15,8 @@ const routes: Routes = [
       {path: 'eps', component: EpsManagementComponent},
       {path: 'doctor', component: DoctorManagementComponent},
       {path: 'patient', component: PatientManagementComponent},
+      {path: 'admin', component: AdminManagementComponent},
+      {path: 'user', component: UserManagementComponent},
     ]
   }
 ];

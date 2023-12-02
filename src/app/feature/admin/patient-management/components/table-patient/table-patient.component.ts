@@ -1,9 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {switchMap} from "rxjs";
 import {PatientService} from "../../shared/Services/patient.service";
-import {UserService} from "../../../doctor-management/shared/Services/user.service";
 import {UserModelDto} from "../../../doctor-management/shared/models/user-dto.model";
 import {PatientPaginatedDto} from "../../shared/models/patient-paginated-dto.model";
+import {EpsService} from "../../../eps-management/shared/service/eps.service";
+import {MdbModalRef, MdbModalService} from "mdb-angular-ui-kit/modal";
+import {
+  FormUpdateDoctorComponent
+} from "../../../doctor-management/components/form-update-doctor/form-update-doctor.component";
+import {FormUpdatePatientComponent} from "../form-update-patient/form-update-patient.component";
+import {ChangeInfoDoctorService} from "../../../doctor-management/shared/Services/change-info-doctor.service";
+import {DoctorUpdate} from "../../../doctor-management/shared/models/doctor-update";
+import {PatientUpdate} from "../../shared/models/patient-update";
+import {ConfirmActionComponent} from "../../../../../shared/components/confirm-action/confirm-action.component";
+import {UserPatientService} from "../../shared/Services/user-patient.service";
+import {ChangeInfoPatientService} from "../../shared/Services/change-info-patient.service";
 
 @Component({
   selector: 'app-table-patient',
@@ -11,18 +22,21 @@ import {PatientPaginatedDto} from "../../shared/models/patient-paginated-dto.mod
   styleUrls: ['./table-patient.component.scss']
 })
 export class TablePatientComponent implements OnInit {
+  modalRefUpdate: MdbModalRef<FormUpdatePatientComponent> | null = null;
   data: PatientPaginatedDto[] = [];
   page = 1;
   total = 0;
   perPage = 10;
   totalRecords = 0;
 
-  constructor(public patientService: PatientService, public userService: UserService) {
+  constructor(public patientService: PatientService, public userPatientService: UserPatientService, public epsService:EpsService,private changeInfoPatientService: ChangeInfoPatientService, private modalService: MdbModalService) {
+    this.changeInfoPatientService.evento.subscribe((data) => {
+      this.getData();
+    });
   }
 
   ngOnInit() {
     this.getData(this.page);
-
   }
 
   getData(page: number = 1) {
@@ -32,27 +46,46 @@ export class TablePatientComponent implements OnInit {
     });
   }
 
+  openModalUpdate(patientUpdate: PatientUpdate) {
+    this.modalRefUpdate = this.modalService.open(FormUpdatePatientComponent, {
+      modalClass: 'modal-lg',
+      data: patientUpdate,
+    });
+    if (this.modalRefUpdate) {
+      this.modalRefUpdate.component.data = patientUpdate;
+    }
+  }
+
   pageChanged(page: number) {
     this.page = page;
     this.getData(this.page);
   }
 
-
-  deletePatient(documentNumber: string) {
-    this.delete(documentNumber);
+  abrirModalConfirmacion(documentNumber: string) {
+    const modalRef: MdbModalRef<ConfirmActionComponent> = this.modalService.open(ConfirmActionComponent);
+    modalRef.onClose.subscribe((result) => {
+      if (result) {
+        this.delete(documentNumber)
+      } else {
+        console.log('Eliminación cancelada');
+      }
+    });
   }
 
   delete(documentNumber: string) {
-    this.userService.getByDocumentNumber(documentNumber).pipe(
+    this.userPatientService.getByDocumentNumber(documentNumber).pipe(
       switchMap((userSearched: UserModelDto) => {
-        return this.userService.delete(userSearched.id);
+        return this.userPatientService.delete(userSearched.id);
       })
-    )
-      .subscribe(
-        () => {
-          console.log('Usuario eliminado correctamente');
-        }
-      );
+    ).subscribe(
+      () => {
+        console.log('Usuario eliminado correctamente');
+        this.getData();
+      },
+      () => {
+        console.log('Fallo en eliminar, contacte con el administrador');
+      }
+    );
   }
 
 

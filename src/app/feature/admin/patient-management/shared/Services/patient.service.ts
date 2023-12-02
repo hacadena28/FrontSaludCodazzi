@@ -4,6 +4,8 @@ import {HttpService} from "@core/services/http.service";
 import {environment} from "@env/environment";
 import {PatientDto} from "../models/patient-dto.interface";
 import {PatientPaginatedDto, Paginated} from '../models/patient-paginated-dto.model';
+import {DoctorUpdate} from "../../../doctor-management/shared/models/doctor-update";
+import {PatientUpdate} from "../models/patient-update";
 
 
 @Injectable()
@@ -42,7 +44,8 @@ export class PatientService {
   getById(id: string): Observable<PatientPaginatedDto> {
     return this.http.doGet<PatientPaginatedDto>(`${environment.appUrl}patient/${id}`)
       .pipe(
-        map((response: any) => new PatientPaginatedDto(response.id,
+        map((response: any) => new PatientPaginatedDto(
+          response.id,
           response.firstName,
           response.secondName,
           response.lastName,
@@ -80,8 +83,8 @@ export class PatientService {
     return this.http.doPost<any, void>(`${environment.appUrl}patient`, {name: name});
   }
 
-  put(id: string, newName: string): Observable<void> {
-    return this.http.doPut<any, void>(`${environment.appUrl}patient/${id}`, {id: id, newName: newName});
+  put(id: string, patientUpdate: PatientUpdate): Observable<void> {
+    return this.http.doPut<any, void>(`${environment.appUrl}patient/${id}`, patientUpdate);
   }
 
   delete(id: string): Observable<void> {
@@ -135,7 +138,7 @@ export class PatientService {
         record.phone,
         record.address,
         record.birthdate,
-        record.specialization))
+        record.epsId))
     }
   }
 }

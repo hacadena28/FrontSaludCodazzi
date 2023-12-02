@@ -30,6 +30,14 @@ import { TablePatientComponent } from './patient-management/components/table-pat
 import {PatientService} from "./patient-management/shared/Services/patient.service";
 import { FormUpdateDoctorComponent } from './doctor-management/components/form-update-doctor/form-update-doctor.component';
 import { FormUpdatePatientComponent } from './patient-management/components/form-update-patient/form-update-patient.component';
+import {UserPatientService} from "./patient-management/shared/Services/user-patient.service";
+import { AdminManagementComponent } from './admin-management/admin-management.component';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { FormUpdateAdminComponent } from './admin-management/components/form-update-admin/form-update-admin.component';
+import { FormCreateAdminComponent } from './admin-management/components/form-create-admin/form-create-admin.component';
+import { TableAdminComponent } from './admin-management/components/table-admin/table-admin.component';
+import {UserAdminService} from "./admin-management/shared/Services/user-admin.service";
+import {AdminService} from "./admin-management/shared/Services/admin.service";
 
 
 @NgModule({
@@ -49,7 +57,12 @@ import { FormUpdatePatientComponent } from './patient-management/components/form
     FormCreatePatientComponent,
     TablePatientComponent,
     FormUpdateDoctorComponent,
-    FormUpdatePatientComponent
+    FormUpdatePatientComponent,
+    AdminManagementComponent,
+    UserManagementComponent,
+    FormUpdateAdminComponent,
+    FormCreateAdminComponent,
+    TableAdminComponent
   ],
   imports: [
     CommonModule,
@@ -64,6 +77,6 @@ import { FormUpdatePatientComponent } from './patient-management/components/form
     MatChipsModule,
     MatCardModule
   ],
-  providers: [EpsService, DoctorService,PatientService, UserService,UserService],
+  providers: [EpsService, DoctorService,PatientService,AdminService, UserService,UserPatientService,UserAdminService],
 })
 export class AdminModule { }

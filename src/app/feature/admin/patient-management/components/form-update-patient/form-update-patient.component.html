@@ -1,1 +1,39 @@
-<p>form-update-patient works!</p>
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="btn-close" aria-label="Close" (click)="close()">
+      <mat-icon fontIcon="close"></mat-icon>
+    </button>
+  </div>
+  <article class="w-full  flex justify- items-center">
+    <section class="w-[60%] fondo h-full flex justify-center items-center">
+      <img src="assets/patientForm.jpg"/>
+    </section>
+    <section class="w-[40%] h-full flex flex-col gap-2 justify-center items-center">
+      <h1 class="text-xl">Actualizar Paciente</h1>
+      <div class="w-[85%] h-[50%]">
+        <form [formGroup]="formulario" class="w-full h-full flex gap-2 flex-wrap">
+          <input formControlName="firstName" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="text" name="firstName" placeholder="Primer nombre" id="firstName"/>
+          <input formControlName="secondName" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="text" name="secondName" placeholder="Segundo nombre" id="secondName"/>
+          <input formControlName="lastName" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="text" name="lastName" placeholder="Primer apellido" id="lastName"/>
+          <input formControlName="secondLastName" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="text" name="secondLastName" placeholder="Segundo apellido" id="secondLastName"/>
+          <input formControlName="email" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="email" name="email" placeholder="Email" id="email"/>
+          <input formControlName="phone" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="number" name="phone" placeholder="Numero telefonico" id="phone"/>
+          <input formControlName="address" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="text" name="address" placeholder="Direccion" id="address"/>
+
+        </form>
+      </div>
+      <div class="w-[80%]">
+        <button class="border h-[1.8rem] rounded-md w-full bg-[#2563eb] text-white text-sm" (click)="updatePatient()"><b>Actualizar
+          Paciente</b></button>
+      </div>
+    </section>
+  </article>
+
+</div>

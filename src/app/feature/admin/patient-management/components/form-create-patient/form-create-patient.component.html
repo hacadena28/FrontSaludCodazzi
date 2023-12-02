@@ -5,22 +5,58 @@
     </button>
   </div>
   <article class="w-full  flex justify- items-center">
-    <section class="w-[60%] fondoPatient h-full flex justify-center items-center">
+    <section class="w-[60%] fondoDoctor h-full flex justify-center items-center">
       <img src="assets/patientForm.jpg"/>
     </section>
     <section class="w-[40%] h-full flex flex-col gap-2 justify-center items-center">
       <h1 class="text-xl">Crear Patient</h1>
       <div class="w-[85%] h-[50%]">
+
+
         <form [formGroup]="formulario" class="w-full h-full flex gap-2 flex-wrap">
-          <input formControlName="name" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2" type="text"
-                 name="name" placeholder="Nombre de EPS" id="name"/>
+          <input formControlName="firstName" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="text" name="firstName" placeholder="Primer nombre" id="firstName"/>
+          <input formControlName="secondName" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="text" name="secondName" placeholder="Segundo nombre" id="secondName"/>
+          <input formControlName="lastName" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="text" name="lastName" placeholder="Primer apellido" id="lastName"/>
+          <input formControlName="secondLastName" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="text" name="secondLastName" placeholder="Segundo apellido" id="secondLastName"/>
+          <select formControlName="documentType" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                  id="documentType">
+            <option value="" disabled selected>Selecciona un tipo de documento</option>
+            <option *ngFor="let type of documentTypes" [value]="type.key">
+              {{ type.value }}
+            </option>
+          </select>
+          <input formControlName="documentNumber" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="number" name="documentNumber" placeholder="Numero de documento" id="documentNumber"/>
+          <input formControlName="email" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="email" name="email" placeholder="Email" id="email"/>
+          <input formControlName="phone" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="number" name="phone" placeholder="Numero telefonico" id="phone"/>
+          <input formControlName="address" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="text" name="address" placeholder="Direccion" id="address"/>
+          <input formControlName="birthdate" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="date" name="birthdate" placeholder="Fecha de nacimiento" id="birthdate"/>
+          <select formControlName="eps" class="border-[2px] w-full border-solid rounded-md h-[2.4rem] indent-3"
+                  name="eps" id="eps">
+            <option selected disabled>Seleccione una Eps</option>
+            <option *ngFor="let eps of data" [value]="eps.id">{{eps.name}} (contributivo)</option>
+          </select>
+
+          <input formControlName="password" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="password" name="password" placeholder="Contraseña" id="password"/>
+          <input formControlName="confirmPassword" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
+                 type="password" name="confirmPassword" placeholder="Confirmar contraseña" id="confirmPassword"/>
         </form>
       </div>
       <div class="w-[80%]">
         <button class="border h-[1.8rem] rounded-md w-full bg-[#2563eb] text-white text-sm" (click)="registerPatient()">
-          <b>Registrar Patient</b></button>
+          <b>Registrar Paciente</b></button>
       </div>
     </section>
   </article>
 
 </div>
+

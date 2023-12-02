@@ -1,0 +1,17 @@
+
+<div *ngFor="let li of listaHistorial" >
+  <app-card >
+    <div class="card">
+
+    <h2>{{ li.patiendFullName }}</h2>
+    <h4>{{ li.date | date: 'fullDate' }}</h4>
+
+    <h5>Descripcion</h5>
+    <h5>{{ li.description }}</h5>
+    <p>Diagnostico: {{ li.diagnosis }}</p>
+    <p>Tratamiento: {{ li.treatment }}</p>
+    <div class="card-buttons">
+    </div>
+    </div>
+  </app-card>
+</div>

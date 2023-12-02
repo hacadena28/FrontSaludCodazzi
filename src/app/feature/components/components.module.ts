@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LayoutPacienteComponent } from './layout-paciente/layout-paciente.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FooterComponent } from './footer/footer.component';
+import { SidebarDoctorComponent } from './sidebar-doctor/sidebar-doctor.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FooterComponent } from './footer/footer.component';
     SidebarComponent,
     NavbarComponent,
     LayoutPacienteComponent,
-    FooterComponent
+    FooterComponent,
+    SidebarDoctorComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { FooterComponent } from './footer/footer.component';
     LayoutComponent,
     LayoutPacienteComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    SidebarDoctorComponent
   ]
 })
 export class ComponentsModule { }

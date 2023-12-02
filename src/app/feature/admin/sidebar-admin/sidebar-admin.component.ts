@@ -21,7 +21,10 @@ export class SidebarAdminComponent {
     this.router.navigate(['admin/patient']);
   }
   redirectToAdmin(): void {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['admin/admin']);
+  }
+  redirectToUser(): void {
+    this.router.navigate(['admin/user']);
   }
 
 }
