@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { AppointmentDTO } from '../shared/interfaces/appointment';
 import { AppointmentService } from '../shared/services/appointment.service';
 import {MdbModalRef, MdbModalService} from "mdb-angular-ui-kit/modal";
@@ -11,7 +11,7 @@ import {CancelarCitaComponent} from "../cancelar-cita/cancelar-cita.component";
   templateUrl: './consultar-cita.component.html',
   styleUrls: ['./consultar-cita.component.scss']
 })
-export class ConsultarCitaComponent {
+export class ConsultarCitaComponent implements OnInit{
   constructor(
     protected aS: AppointmentService,
     protected modalService: MdbModalService,
@@ -57,23 +57,11 @@ export class ConsultarCitaComponent {
   }
 
   showReagendarButton(state: string): boolean {
-    return state === 'Scheduled';
+    return state === 'Scheduled' || state === 'Rescheduled';
   }
 
   showCancelarButton(state: string): boolean {
     return state === 'Scheduled' || state === 'Rescheduled';
-  }
-
-  reagendarCita(citaId: string): void {
-    // Lógica para reagendar cita
-  }
-
-  cancelarCita(citaId: string): void {
-    // Lógica para cancelar cita
-  }
-
-  verInformacionCita(citaId: string): void {
-    // Lógica para ver información de cita médica
   }
 
   openModalReagendar(appointment: AppointmentDTO) {
@@ -93,5 +81,9 @@ export class ConsultarCitaComponent {
     if (this.modalRefCancelarCita) {
       this.modalRefCancelarCita.component.appointment = appointment;
     }
+  }
+
+  verInformacionCita(id: string) {
+
   }
 }

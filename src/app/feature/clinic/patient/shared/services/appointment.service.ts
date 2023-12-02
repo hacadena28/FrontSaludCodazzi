@@ -15,11 +15,20 @@ export class AppointmentService {
     let user = JSON.parse(userDataLocal || '');
     return this.http.doGet<Paginated<AppointmentDTO>>(`${environment.appUrl}appointment/user/${user.userId}/?page=${page}&recordsPerPage=${recordsPerPage}`)
       .pipe(
+        map((response: any) => this.mapToAppaintmentPaginated(response))
+      );
+  }
+
+  getByDoctorAndDate(date: any): Observable<AppointmentDTO[]> {
+    let userDataLocal = localStorage.getItem('user')
+    let user = JSON.parse(userDataLocal || '');
+    return this.http.doGet<AppointmentDTO[]>(`${environment.appUrl}appointment/day/${user.userId}/${date}`)
+      .pipe(
         map((response: any) => this.mapToAppaintment(response))
       );
   }
 
-  private mapToAppaintment(response: any): Paginated<AppointmentDTO> {
+  private mapToAppaintmentPaginated(response: any): Paginated<AppointmentDTO> {
     return {
       page: response.page,
       totalPages: response.totalpages,
@@ -30,8 +39,18 @@ export class AppointmentService {
     }
   }
 
+  private mapToAppaintment(response: any): AppointmentDTO[] {
+    return response.map((record: any) => new AppointmentDTO(record.id,
+      record.appointmentStartDate,record.appointmentFinalDate, record.state, record.type,
+      record.description, record.patientId, record.doctorId, record.doctorFullName, record.patientFullName));
+  }
+
   reagendarCita(reagendarCita: any): Observable<void> {
     return this.http.doPut<any, void>(`${environment.appUrl}appointment/${reagendarCita.id}`, reagendarCita);
+  }
+
+  agregarHistoriaClinica(body: any): Observable<void> {
+    return this.http.doPost<any, void>(`${environment.appUrl}medicalhistory`, body);
   }
 
 }

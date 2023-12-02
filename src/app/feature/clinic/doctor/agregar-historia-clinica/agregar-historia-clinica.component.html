@@ -1,0 +1,19 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h2 class="modal-title">Registrar resultados de la cita y finalizarla</h2>
+    <button type="button" class="btn-close" (click)="cerrar()"></button>
+  </div>
+  <div class="modal-body">
+    <article class="w-full  flex justify- items-center">
+      <form [formGroup]="formulario" class="w-full flex gap-5 flex-wrap">
+        <textarea formControlName="description" class="border-[2px] w-[100%] border-solid rounded-md h-[5rem] indent-3" name="description" placeholder="Descripción" id="description"></textarea>
+        <textarea formControlName="diagnosis" class="border-[2px] w-[100%] border-solid rounded-md h-[5rem] indent-3" name="diagnosis" placeholder="Diagnóstico" id="diagnosis"></textarea>
+        <textarea formControlName="treatment" class="border-[2px] w-[100%] border-solid rounded-md h-[5rem] indent-3" name="treatment" placeholder="Tratamiento" id="treatment"></textarea>
+      </form>
+    </article>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="cerrar()">Cerrar</button>
+    <button type="button" class="btn btn-success" (click)="agregarHistoria()">Aceptar</button>
+  </div>
+</div>

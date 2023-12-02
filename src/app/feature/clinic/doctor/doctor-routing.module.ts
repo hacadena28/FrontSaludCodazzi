@@ -1,8 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import {PagePatientComponent} from "../patient/page-patient/page-patient.component";
+import {ConsultarAgendaComponent} from "./consultar-agenda/consultar-agenda.component";
 import {PageDoctorComponent} from "./page-doctor/page-doctor.component";
 import {ConsultarMedicalHistoryComponent} from "./consultar-medical-history/consultar-medical-history.component";
-import {ConsultarAgendaComponent} from "./consultar-agenda/consultar-agenda.component";
 
 const routes: Routes = [
   {
