@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { environment } from '@env/environment';
 import { AppointmentDTO } from '../shared/interfaces/appointment';
 import { AppointmentService } from '../shared/services/appointment.service';
+import {MdbModalRef, MdbModalService} from "mdb-angular-ui-kit/modal";
+import {ReagendarCitaComponent} from "../reagendar-cita/reagendar-cita.component";
+import {ChangeInfoAppointment} from "../shared/services/chage-info-appointment.service";
+import {CancelarCitaComponent} from "../cancelar-cita/cancelar-cita.component";
 
 @Component({
   selector: 'app-consultar-cita',
@@ -10,12 +12,21 @@ import { AppointmentService } from '../shared/services/appointment.service';
   styleUrls: ['./consultar-cita.component.scss']
 })
 export class ConsultarCitaComponent {
-  aS = inject(AppointmentService);
-
+  constructor(
+    protected aS: AppointmentService,
+    protected modalService: MdbModalService,
+    private changeInfoEpsAppointment :ChangeInfoAppointment
+  ) {
+    this.changeInfoEpsAppointment.evento.subscribe((data) => {
+      this.getData(this.page);
+    });
+  }
+  modalRefReagendarCita: MdbModalRef<ReagendarCitaComponent> | null = null;
+  modalRefCancelarCita: MdbModalRef<CancelarCitaComponent> | null = null;
   data: AppointmentDTO[] = [];
   page = 1;
   total = 0;
-  perPage = 10;
+  perPage = 5;
   totalRecords = 0;
   stateMap: any = {
     'Scheduled': 'Programada',
@@ -31,7 +42,7 @@ export class ConsultarCitaComponent {
   getData(page: number = 1) {
     this.aS.getAllPaginated(page, 5).subscribe(response => {
       this.data = response.records;
-      this.total = response.totalRecords + 1;
+      this.total = response.totalRecords;
       console.log(response);
     });
   }
@@ -45,11 +56,42 @@ export class ConsultarCitaComponent {
     return this.stateMap[value] || value;
   }
 
-  editarCita(id: string) {
-
+  showReagendarButton(state: string): boolean {
+    return state === 'Scheduled';
   }
 
-  eliminarCita(id: string) {
+  showCancelarButton(state: string): boolean {
+    return state === 'Scheduled' || state === 'Rescheduled';
+  }
 
+  reagendarCita(citaId: string): void {
+    // Lógica para reagendar cita
+  }
+
+  cancelarCita(citaId: string): void {
+    // Lógica para cancelar cita
+  }
+
+  verInformacionCita(citaId: string): void {
+    // Lógica para ver información de cita médica
+  }
+
+  openModalReagendar(appointment: AppointmentDTO) {
+    this.modalRefReagendarCita = this.modalService.open(ReagendarCitaComponent, {
+      modalClass: 'modal-xs',
+      data: appointment,
+    });
+    if (this.modalRefReagendarCita) {
+      this.modalRefReagendarCita.component.appointment = appointment;
+    }
+  }
+  openModalCancelar(appointment: AppointmentDTO) {
+    this.modalRefCancelarCita = this.modalService.open(CancelarCitaComponent, {
+      modalClass: 'modal-xs',
+      data: appointment,
+    });
+    if (this.modalRefCancelarCita) {
+      this.modalRefCancelarCita.component.appointment = appointment;
+    }
   }
 }

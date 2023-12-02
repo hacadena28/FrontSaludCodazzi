@@ -10,13 +10,18 @@ import {NgxPaginationModule} from "ngx-pagination";
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppointmentService } from './shared/services/appointment.service';
 import { MatIconModule } from '@angular/material/icon';
+import { ReagendarCitaComponent } from './reagendar-cita/reagendar-cita.component';
+import {MdbModalModule} from "mdb-angular-ui-kit/modal";
+import {CancelarCitaComponent} from "./cancelar-cita/cancelar-cita.component";
 
 
 @NgModule({
   declarations: [
     PagePatientComponent,
     RegistrarCitaComponent,
-    ConsultarCitaComponent
+    ConsultarCitaComponent,
+    ReagendarCitaComponent,
+    CancelarCitaComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +29,8 @@ import { MatIconModule } from '@angular/material/icon';
     PatientRoutingModule,
     ComponentsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    MdbModalModule,
   ],
   providers: [
     DatePipe, AppointmentService

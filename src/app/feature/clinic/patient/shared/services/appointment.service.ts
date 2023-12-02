@@ -11,7 +11,9 @@ export class AppointmentService {
 
 
   getAllPaginated(page: number, recordsPerPage: number): Observable<Paginated<AppointmentDTO>> {
-    return this.http.doGet<Paginated<AppointmentDTO>>(`${environment.appUrl}appointment?page=${page}&recordsPerPage=${recordsPerPage}`)
+    let userDataLocal = localStorage.getItem('user')
+    let user = JSON.parse(userDataLocal || '');
+    return this.http.doGet<Paginated<AppointmentDTO>>(`${environment.appUrl}appointment/user/${user.userId}/?page=${page}&recordsPerPage=${recordsPerPage}`)
       .pipe(
         map((response: any) => this.mapToAppaintment(response))
       );
@@ -23,13 +25,13 @@ export class AppointmentService {
       totalPages: response.totalpages,
       totalRecords: response.totalRecords,
       records: response.records.map((record: any) => new AppointmentDTO(record.id,
-        record.appointmentStartDate, record.state, record.type,
-        record.description, record.patientId, record.doctorId))
+        record.appointmentStartDate,record.appointmentFinalDate, record.state, record.type,
+        record.description, record.patientId, record.doctorId, record.doctorFullName, record.patientFullName))
     }
   }
 
-  delete(id: string): Observable<void> {
-    return this.http.doDelete<any>(`${environment.appUrl}appointment/${id}`);
+  reagendarCita(reagendarCita: any): Observable<void> {
+    return this.http.doPut<any, void>(`${environment.appUrl}appointment/${reagendarCita.id}`, reagendarCita);
   }
 
 }

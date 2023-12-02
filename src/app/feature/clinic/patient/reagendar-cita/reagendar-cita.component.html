@@ -1,0 +1,32 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">Reagendar Cita</h5>
+    <button type="button" class="btn-close" (click)="cerrar()"></button>
+  </div>
+  <div class="modal-body">
+    <form
+      [formGroup]="formulario"
+      class="flex flex-wrap w-full justify-between"
+    >
+      <div class="w-[48%] mb-4">
+        <label for="fecha" class="block text-sm text-gray-700 font-bold"
+        >Fecha</label
+        >
+        <input
+          formControlName="appointmentStartDate"
+          id="fecha"
+          name="fecha"
+          class="border w-full h-10 rounded-md px-3"
+          placeholder="Seleccione la fecha"
+          type="datetime-local"
+          required
+        />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="cerrar()">Cancelar</button>
+    <button type="button" class="btn btn-success" (click)="reagendarCita()">Reagendar</button>
+  </div>
+</div>
+
