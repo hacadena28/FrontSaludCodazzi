@@ -38,7 +38,6 @@ export class RegistrarCitaComponent implements OnInit {
     this.builderForm();
     this.getDoctores();
 
-
   }
 
   builderForm() {

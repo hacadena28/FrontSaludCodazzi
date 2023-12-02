@@ -25,27 +25,59 @@
         </tr>
         <tr *ngFor="let item of data | paginate: { itemsPerPage: perPage, currentPage: page, totalItems: total }">
           <td class="w-[5%] border border-collapse hidden">{{ item.id }}</td>
-          <td class="w-[15%] border text-xs">{{ item.patientId }}</td>
+          <td class="w-[15%] border text-xl">{{ item.patientFullName }}</td>
           <td class="w-[20%] border">{{ item.description }}</td>
-          <td class="w-[15%] border">{{ item.appointmentStartDate }}</td>
-          <td class="w-[15%] border text-xs">{{ item.doctorId }}</td>
-          <td class="w-[15%] border" [ngSwitch]="item.state">
-            <ng-container *ngSwitchCase="'Scheduled'">{{ getStateName(item.state) }}</ng-container>
-            <ng-container *ngSwitchCase="'Rescheduled'">{{ getStateName(item.state) }}</ng-container>
-            <ng-container *ngSwitchCase="'Canceled'">{{ getStateName(item.state) }}</ng-container>
-            <ng-container *ngSwitchCase="'Attended'">{{ getStateName(item.state) }}</ng-container>
-            <ng-container *ngSwitchDefault>{{ item.state }}</ng-container>
-          </td>
-
-          <td>
-            <div>
-              <button STYLE="background-color: orange; color: white" class="m-2 rounded p-2" mat-raised-button (click)="editarCita(item.id)">
-                <mat-icon>edit</mat-icon>
-                <span>Editar</span>
+          <td class="w-[15%] border">{{ item.appointmentStartDate | date: 'yyyy-MM-dd HH:mm a' }}</td>
+          <td class="w-[15%] border text-xl">{{ item.doctorFullName }}</td>
+          <td class="w-[5%] border" [ngSwitch]="item.state">
+            <ng-container *ngSwitchCase="'Scheduled'">
+              <button STYLE="background-color: #637cfa; color: white" mat-raised-button color="primary" class="m-2 rounded p-2 scheduled-state">
+                <mat-icon>schedule</mat-icon>
+                <span>{{ getStateName(item.state) }}</span>
               </button>
-              <button STYLE="background-color: red; color: white" class="m-2 rounded p-2" mat-raised-button (click)="eliminarCita(item.id)">
-                <mat-icon>delete</mat-icon>
-                <span>Eliminar</span>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Rescheduled'">
+              <button STYLE="background-color: #00a6ff; color: white" mat-raised-button color="accent" class="m-2 rounded p-2 rescheduled-state">
+                <mat-icon>update</mat-icon>
+                <span>{{ getStateName(item.state) }}</span>
+              </button>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Canceled'">
+              <button STYLE="background-color: #df5757; color: white" mat-raised-button color="warn" class="m-2 rounded p-2 canceled-state">
+                <mat-icon>cancel</mat-icon>
+                <span>{{ getStateName(item.state) }}</span>
+              </button>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Attended'">
+              <button mat-raised-button STYLE="background-color: #08c736; color: white" class="m-2 rounded p-2 attended-state">
+                <mat-icon>check_circle</mat-icon>
+                <span>{{ getStateName(item.state) }}</span>
+              </button>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <span>{{ item.state }}</span>
+            </ng-container>
+          </td>
+          <td >
+            <div>
+              <button *ngIf="showReagendarButton(item.state)" STYLE="background-color: #00bcff; color: white" mat-raised-button class="m-2 rounded p-2" (click)="openModalReagendar(item)">
+                <mat-icon>event</mat-icon>
+                <span>Reagendar</span>
+              </button>
+
+              <button *ngIf="showCancelarButton(item.state)" STYLE="background-color: #df5757; color: white" mat-raised-button color="warn" class="m-2 rounded p-2" (click)="openModalCancelar(item)">
+                <mat-icon>cancel</mat-icon>
+                <span>Cancelar</span>
+              </button>
+
+              <button *ngIf="item.state === 'Attended'" STYLE="background-color: #08c736; color: white" mat-raised-button class="m-2 rounded p-2" (click)="verInformacionCita(item.id)">
+                <mat-icon>visibility</mat-icon>
+                <span>Ver Información</span>
+              </button>
+
+              <button *ngIf="item.state === 'Canceled'" STYLE="background-color: #717171; color: white" mat-raised-button class="m-2 rounded p-2" >
+
+                <span>Sin Acciones</span>
               </button>
             </div>
           </td>
