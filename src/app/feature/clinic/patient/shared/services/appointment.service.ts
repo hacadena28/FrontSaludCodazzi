@@ -21,8 +21,18 @@ export class AppointmentService {
 
   getByDoctorAndDate(date: any): Observable<AppointmentDTO[]> {
     let userDataLocal = localStorage.getItem('user')
-    let user = JSON.parse(userDataLocal || '');
-    return this.http.doGet<AppointmentDTO[]>(`${environment.appUrl}appointment/day/${user.userId}/${date}`)
+    debugger
+    let user;
+    if (userDataLocal) {
+      user = JSON.parse(userDataLocal);
+    } else {
+      // Manejar el caso en el que userDataLocal es undefined o null
+      // Podrías asignar un valor predeterminado a 'user' o tomar otra acción apropiada.
+      user = ''; // Por ejemplo, asignar una cadena vacía.
+    }
+
+    console.log(user);
+    return this.http.doGet<AppointmentDTO[]>(`${environment.appUrl}appointment/user/${user.userId}`)
       .pipe(
         map((response: any) => this.mapToAppaintment(response))
       );

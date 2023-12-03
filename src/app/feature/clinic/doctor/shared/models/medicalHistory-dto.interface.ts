@@ -5,4 +5,6 @@ export interface MedicalHistoryDto{
   diagnosis: string;
   treatment: string;
   patientId: string;
+  fullName:string;
+  documentoNumber:string;
 }

@@ -46,7 +46,7 @@ import {FormCreateAdminComponent} from './admin-management/components/form-creat
 import {TableAdminComponent} from './admin-management/components/table-admin/table-admin.component';
 import {UserAdminService} from "./admin-management/shared/Services/user-admin.service";
 import {AdminService} from "./admin-management/shared/Services/admin.service";
-import {MedicalHistoryService} from "../clinic/doctor/consultar-medical-history/Services/medical-history.service";
+import {MedicalHistoryService} from "../clinic/doctor/shared/services/medical-history.service";
 
 
 @NgModule({

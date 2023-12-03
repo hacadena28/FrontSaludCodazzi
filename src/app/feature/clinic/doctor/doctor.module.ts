@@ -12,10 +12,10 @@ import {AppointmentService} from "../patient/shared/services/appointment.service
 import {MdbModalService} from "mdb-angular-ui-kit/modal";
 import {MatCardModule} from "@angular/material/card";
 import { AgregarHistoriaClinicaComponent } from './agregar-historia-clinica/agregar-historia-clinica.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ConsultarMedicalHistoryComponent } from './consultar-medical-history/consultar-medical-history.component';
 import {SharedModule} from "../../../shared/shared.module";
-import {MedicalHistoryService} from "./consultar-medical-history/Services/medical-history.service";
+import {MedicalHistoryService} from "./shared/services/medical-history.service";
 
 
 @NgModule({
@@ -35,7 +35,8 @@ import {MedicalHistoryService} from "./consultar-medical-history/Services/medica
     NgxPaginationModule,
     MatCardModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   providers: [AppointmentService, MdbModalService, DatePipe,
     SharedModule,MedicalHistoryService

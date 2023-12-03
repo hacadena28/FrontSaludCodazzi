@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { environment } from "@env/environment";
-import { DatePipe } from '@angular/common';
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit, inject} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {environment} from "@env/environment";
+import {DatePipe} from '@angular/common';
 
 
 interface Doctor {
@@ -27,8 +27,16 @@ interface Cita {
 export class RegistrarCitaComponent implements OnInit {
   formulario!: FormGroup;
   doctors: Doctor[] = [];
-  horasIntermedias: string[] = [];
-  typeAppointmentOptions: any[] = [{ value: 'Scheduled', name: 'General' }, { value: 'Specialized', name: 'Especializada' }];
+  hours = [
+    {value: '08', name: "08 AM"}, {value: '09', name: "09 AM"}, {value: '10', name: "10 AM"}, {
+      value: '11', name: "11 AM"
+    }, {value: '12', name: "12 AM"}, {value: '02', name: "02 PM"}, {
+      value: '03', name: "03 PM"
+    }, {value: '04', name: "04 PM"}, {value: '05', name: "05 PM"}, {
+      value: '06', name: "06 PM"
+    }];
+  minutes = ['00', '30'];
+  typeAppointmentOptions: any[] = [{value: 'General', name: 'General'}, {value: 'Specialized', name: 'Especializada'}];
 
   http = inject(HttpClient);
   formBuilder = inject(FormBuilder);
@@ -40,13 +48,26 @@ export class RegistrarCitaComponent implements OnInit {
 
   }
 
+  validateForm(): boolean {
+    const form = this.formulario;
+    for (const i in form.controls) {
+      if (form.controls.hasOwnProperty(i)) {
+        form.controls[i].markAsTouched();
+        form.controls[i].updateValueAndValidity();
+      }
+    }
+    return form.valid;
+  }
+
   builderForm() {
     let userDataLocal = localStorage.getItem('user')
     let user = JSON.parse(userDataLocal || '');
     this.formulario = this.formBuilder.group({
+      date: ['', Validators.required],
+      hour: ['', Validators.required],
+      minute: ['', Validators.required],
       type: ['', Validators.required],
-      appointmentStartDate: ['', Validators.required],
-      doctorId: ['', Validators.required],
+      doctor: ['', Validators.required],
       description: ['', Validators.required],
       userId: [user.userId],
     });
@@ -60,21 +81,26 @@ export class RegistrarCitaComponent implements OnInit {
 
   }
 
-  generarHorasIntermedias() {
-    // Esto es el horario de oficina
-    const horaInicial = 8;
-    const horaFinal = 17;
-    for (let hora = horaInicial; hora <= horaFinal; hora++) {
-      for (let minuto of ['00', '30']) {
-        this.horasIntermedias.push(`${hora}:${minuto}`);
-      }
-    }
-  }
-
   registrarCita() {
     if (this.formulario) {
-      const cita: Cita = this.formulario.value;
-      cita.appointmentStartDate = this.datePipe.transform(cita.appointmentStartDate, 'yyyy-MM-ddTHH:mm:ss');
+      const date = this.formulario.get('date')!.value;
+      const hour = this.formulario.get('hour')!.value;
+      const minute = this.formulario.get('minute')!.value;
+      const type = this.formulario.get('type')!.value;
+      const description = this.formulario.get('description')!.value;
+      const userId = this.formulario.get('userId')!.value;
+      const doctorId = this.formulario.get('doctor')!.value;
+
+      const appointmentStartDate = new Date(date + 'T' + hour + ':' + minute + ':00');
+
+      const cita = {
+        appointmentStartDate,
+        type,
+        description,
+        userId,
+        doctorId
+      };
+
 
       this.http.post(`${environment.appUrl}appointment`, cita)
         .subscribe(response => {
