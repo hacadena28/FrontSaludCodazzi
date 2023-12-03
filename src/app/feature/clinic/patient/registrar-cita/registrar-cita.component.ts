@@ -1,8 +1,8 @@
-import {HttpClient} from '@angular/common/http';
-import {Component, OnInit, inject} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {environment} from "@env/environment";
-import {DatePipe} from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { environment } from "@env/environment";
+import { DatePipe } from '@angular/common';
 
 
 interface Doctor {
@@ -37,6 +37,7 @@ export class RegistrarCitaComponent implements OnInit {
     }];
   minutes = ['00', '30'];
   typeAppointmentOptions: any[] = [{value: 'General', name: 'General'}, {value: 'Specialized', name: 'Especializada'}];
+  horasIntermedias: string[] = [];
 
   http = inject(HttpClient);
   formBuilder = inject(FormBuilder);
@@ -107,6 +108,11 @@ export class RegistrarCitaComponent implements OnInit {
           console.log('Cita registrada exitosamente:', response);
           alert('Cita registrada exitosamente');
         });
+    }
+    else
+
+    {
+      alert("formulario no valido");
     }
   }
 }
