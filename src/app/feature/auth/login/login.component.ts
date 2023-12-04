@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {AuthService} from "../shared/service/auth.service";
+import {NotificationService} from "../../../shared/notification.service";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   showError: boolean = false;
   showAuth: boolean = false;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -51,12 +52,12 @@ export class LoginComponent implements OnInit {
   login() {
     const { documentNumber, password } = this.loginForm.value;
     this.authService.login({ documentNumber, password }).subscribe((result) => {
-      alert("Inicio de sesion exitoso");
+      this.notificationService.mostrarExito("Inicio de sesion exitoso");
       this.redirect(result.role);
       localStorage.setItem('user', JSON.stringify(result));
       localStorage.setItem('documentNumber', JSON.stringify(documentNumber));
     }, (error) => {
-      alert("Credenciales erroneas");
+      this.notificationService.mostrarError("Error verifique sus credenciales");
     })
   }
 }

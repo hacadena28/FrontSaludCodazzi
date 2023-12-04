@@ -57,7 +57,7 @@ export class ConsultarCitaComponent implements OnInit{
   }
 
   showReagendarButton(state: string): boolean {
-    return state === 'Scheduled' || state === 'Rescheduled';
+    return state === 'Scheduled';
   }
 
   showCancelarButton(state: string): boolean {
