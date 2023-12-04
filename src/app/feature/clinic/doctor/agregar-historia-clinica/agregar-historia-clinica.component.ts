@@ -53,17 +53,18 @@ export class AgregarHistoriaClinicaComponent {
   }
 
   agregarHistoriaClinica() {
+    debugger
     let data = {
-      date: this.datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm:ss'),
+      date: new Date(),
       description: this.formulario.value.description,
       diagnosis: this.formulario.value.diagnosis,
       treatment: this.formulario.value.treatment,
-      documentoNumber: this.data.patientId,
+      patiendId: this.data.patientId,
     }
     this.appointmentService.agregarHistoriaClinica(data).subscribe((result) => {
       this.changeInfoAppointment.emitirEvento("CHAGE_DATA");
     }, () => {
-      alert("No se puedo registar el historial");
+      alert("rregistro completado");
     })
   }
 
