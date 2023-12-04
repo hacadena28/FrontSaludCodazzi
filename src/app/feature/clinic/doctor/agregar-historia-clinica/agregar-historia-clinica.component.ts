@@ -6,6 +6,7 @@ import {ChangeInfoAppointment} from "../../patient/shared/services/chage-info-ap
 import {AppointmentService} from "../../patient/shared/services/appointment.service";
 import {DatePipe} from "@angular/common";
 import {ChangeInfoMedicalHistoryService} from "../shared/services/change-info-medical-history.service";
+import {NotificationService} from "../../../../shared/notification.service";
 
 @Component({
   selector: 'app-agregar-historia-clinica',
@@ -19,7 +20,8 @@ export class AgregarHistoriaClinicaComponent {
   appointmentService = inject(AppointmentService);
   datePipe = inject(DatePipe);
 
-  constructor(public modalRef: MdbModalRef<AgregarHistoriaClinicaComponent>, private changeInfoMedicalHistory: ChangeInfoMedicalHistoryService, private changeInfoAppointment: ChangeInfoAppointment, private fb: FormBuilder) {
+  constructor(public modalRef: MdbModalRef<AgregarHistoriaClinicaComponent>, private notificationService: NotificationService
+    , private changeInfoMedicalHistory: ChangeInfoMedicalHistoryService, private changeInfoAppointment: ChangeInfoAppointment, private fb: FormBuilder) {
 
 
     this.formulario = this.fb.group({
@@ -45,10 +47,12 @@ export class AgregarHistoriaClinicaComponent {
         this.modalRef.close(true);
         this.agregarHistoriaClinica();
       }, () => {
-        alert("Por favor ajuste la fecha, debido a que debe ser horario de oficina");
+        this.notificationService.mostrarError("Por favor ajuste la fecha, debido a que debe ser horario de oficina");
+
       })
     } else {
-      alert("llene todos los campos del formulario");
+      this.notificationService.mostrarError("llene todos los campos del formulario");
+
     }
   }
 
@@ -63,8 +67,10 @@ export class AgregarHistoriaClinicaComponent {
     }
     this.appointmentService.agregarHistoriaClinica(data).subscribe((result) => {
       this.changeInfoAppointment.emitirEvento("CHAGE_DATA");
+      this.notificationService.mostrarExito("Historia agregada exitosamente");
+
     }, () => {
-      alert("rregistro completado");
+      this.notificationService.mostrarExito("Error al registrar historia");
     })
   }
 

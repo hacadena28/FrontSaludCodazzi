@@ -15,6 +15,7 @@ import {AdminUpdate} from "../../shared/models/admin-update";
 import {ConfirmActionComponent} from "../../../../../shared/components/confirm-action/confirm-action.component";
 import {UserAdminService} from "../../shared/Services/user-admin.service";
 import {ChangeInfoAdminService} from "../../shared/Services/change-info-admin.service";
+import {NotificationService} from "../../../../../shared/notification.service";
 
 @Component({
   selector: 'app-table-admin',
@@ -29,7 +30,7 @@ export class TableAdminComponent implements OnInit {
   perPage = 10;
   totalRecords = 0;
 
-  constructor(public adminService: AdminService, public userAdminService: UserAdminService, public epsService:EpsService,private changeInfoAdminService: ChangeInfoAdminService, private modalService: MdbModalService) {
+  constructor(public adminService: AdminService, public userAdminService: UserAdminService, private notificationService: NotificationService,     public epsService:EpsService,private changeInfoAdminService: ChangeInfoAdminService, private modalService: MdbModalService) {
     this.changeInfoAdminService.evento.subscribe((data) => {
       this.getData();
     });
@@ -79,11 +80,12 @@ export class TableAdminComponent implements OnInit {
       })
     ).subscribe(
       () => {
-        console.log('Usuario eliminado correctamente');
+        this.notificationService.mostrarExito("Usuario eliminado correctamente");
         this.getData();
       },
       () => {
-        console.log('Fallo en eliminar, contacte con el administrador');
+        this.notificationService.mostrarError("Fallo en eliminar, contacte con el administrador");
+
       }
     );
   }

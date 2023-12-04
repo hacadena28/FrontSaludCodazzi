@@ -1,10 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { environment } from "@env/environment";
-import { DatePipe } from '@angular/common';
-
-
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit, inject} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {environment} from "@env/environment";
+import {DatePipe} from '@angular/common';
+import {NotificationService} from "../../../../shared/notification.service";
 
 
 interface Doctor {
@@ -44,6 +43,9 @@ export class RegistrarCitaComponent implements OnInit {
   http = inject(HttpClient);
   formBuilder = inject(FormBuilder);
   datePipe = inject(DatePipe);
+
+  constructor(private notificationService: NotificationService,) {
+  }
 
   ngOnInit(): void {
     this.builderForm();
@@ -107,14 +109,10 @@ export class RegistrarCitaComponent implements OnInit {
 
       this.http.post(`${environment.appUrl}appointment`, cita)
         .subscribe(response => {
-          console.log('Cita registrada exitosamente:', response);
-          alert('Cita registrada exitosamente');
+          this.notificationService.mostrarExito("Cita registrada exitosamente")
         });
-    }
-    else
-
-    {
-      alert("formulario no valido");
+    } else {
+      this.notificationService.mostrarError("Error al registrar la cita")
     }
   }
 }

@@ -15,6 +15,7 @@ import {PatientUpdate} from "../../shared/models/patient-update";
 import {ConfirmActionComponent} from "../../../../../shared/components/confirm-action/confirm-action.component";
 import {UserPatientService} from "../../shared/Services/user-patient.service";
 import {ChangeInfoPatientService} from "../../shared/Services/change-info-patient.service";
+import {NotificationService} from "../../../../../shared/notification.service";
 
 @Component({
   selector: 'app-table-patient',
@@ -29,7 +30,8 @@ export class TablePatientComponent implements OnInit {
   perPage = 10;
   totalRecords = 0;
 
-  constructor(public patientService: PatientService, public userPatientService: UserPatientService, public epsService:EpsService,private changeInfoPatientService: ChangeInfoPatientService, private modalService: MdbModalService) {
+  constructor(public patientService: PatientService, private notificationService: NotificationService,
+              public userPatientService: UserPatientService, public epsService: EpsService, private changeInfoPatientService: ChangeInfoPatientService, private modalService: MdbModalService) {
     this.changeInfoPatientService.evento.subscribe((data) => {
       this.getData();
     });
@@ -79,11 +81,11 @@ export class TablePatientComponent implements OnInit {
       })
     ).subscribe(
       () => {
-        console.log('Usuario eliminado correctamente');
+        this.notificationService.mostrarExito("Usuario eliminado correctamente");
         this.getData();
       },
       () => {
-        console.log('Fallo en eliminar, contacte con el administrador');
+        this.notificationService.mostrarError("Fallo en eliminar, contacte con el administrador");
       }
     );
   }

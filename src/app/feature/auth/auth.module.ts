@@ -9,6 +9,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import {CreatePatientService} from "./shared/service/patient.service";
 import {AuthService} from "./shared/service/auth.service";
 import {EpsService} from "../admin/eps-management/shared/service/eps.service";
+import {UserService} from "../admin/doctor-management/shared/Services/user.service";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 
 @NgModule({
@@ -20,8 +22,9 @@ import {EpsService} from "../admin/eps-management/shared/service/eps.service";
   imports: [
     CommonModule,
     AuthRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxSpinnerModule
   ],
-  providers: [CreatePatientService, EpsService, AuthService]
+  providers: [CreatePatientService, EpsService, AuthService,UserService]
 })
 export class AuthModule { }

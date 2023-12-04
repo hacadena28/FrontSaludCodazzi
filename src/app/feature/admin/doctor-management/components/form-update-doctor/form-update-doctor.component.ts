@@ -5,6 +5,7 @@ import {DoctorDto} from "../../shared/models/doctor-dto.interface";
 import {data} from "autoprefixer";
 import {DoctorService} from "../../shared/Services/doctor.service";
 import {ChangeInfoDoctorService} from "../../shared/Services/change-info-doctor.service";
+import {NotificationService} from "../../../../../shared/notification.service";
 
 @Component({
   selector: 'app-form-update-doctor',
@@ -19,7 +20,8 @@ export class FormUpdateDoctorComponent implements OnInit {
     private formBuilder: FormBuilder,
     private doctorService: DoctorService,
     public modalRef: MdbModalRef<FormUpdateDoctorComponent>,
-    private changeInfoDoctorService: ChangeInfoDoctorService
+    private changeInfoDoctorService: ChangeInfoDoctorService,
+    private notificationService: NotificationService,
   ) {
   }
 
@@ -75,10 +77,11 @@ export class FormUpdateDoctorComponent implements OnInit {
         (result) => {
           this.changeInfoDoctorService.emitirEvento("RECARGA_DATA");
           this.close();
-          alert('Doctor actualizada con exito');
+          this.notificationService.mostrarExito("Doctor actualizada con exito");
         },
         () => {
-          alert('No se pudo actualizar la Doctor, contacta al administrador');
+          this.notificationService.mostrarError("No se pudo actualizar la Doctor, contacta al administrador");
+
         }
       );
     }

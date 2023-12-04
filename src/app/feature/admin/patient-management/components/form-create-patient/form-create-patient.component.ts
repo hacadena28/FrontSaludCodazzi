@@ -8,16 +8,18 @@ import {ChangeInfoPatientService} from "../../shared/Services/change-info-patien
 import {UserPatientService} from "../../shared/Services/user-patient.service";
 import {EpsService} from "../../../eps-management/shared/service/eps.service";
 import {EpsDto} from "../../../eps-management/shared/models/eps-dto.interface";
+import {NotificationService} from "../../../../../shared/notification.service";
 
 @Component({
   selector: 'app-form-create-patient',
   templateUrl: './form-create-patient.component.html',
   styleUrls: ['./form-create-patient.component.scss']
 })
-export class FormCreatePatientComponent implements OnInit{
+export class FormCreatePatientComponent implements OnInit {
   data: EpsDto[] = [];
   formulario!: FormGroup;
-  documentTypes = Object.entries(TypeDocument).map(([key, value]) => ({key, value}));specialization = Object.values(Specialization);
+  documentTypes = Object.entries(TypeDocument).map(([key, value]) => ({key, value}));
+  specialization = Object.values(Specialization);
 
 
   ngOnInit(): void {
@@ -32,10 +34,10 @@ export class FormCreatePatientComponent implements OnInit{
     private userService: UserPatientService,
     public modalRef: MdbModalRef<FormCreatePatientComponent>,
     private changeInfoPatientService: ChangeInfoPatientService,
+    private notificationService: NotificationService,
   ) {
     this.builderForms();
   }
-
 
 
   builderForms() {
@@ -67,17 +69,19 @@ export class FormCreatePatientComponent implements OnInit{
     }
     return form.valid;
   }
+
   close(): void {
     const closeMessage = 'Modal closed';
     this.modalRef.close(closeMessage)
   }
+
   private getEps() {
     this.epsService.getAll().subscribe((data) => {
       this.data = data;
     })
   }
 
-registerPatient() {
+  registerPatient() {
     if (this.formulario.valid) {
       const patientRegistration = {
         password: this.formulario.value.password,
@@ -99,15 +103,16 @@ registerPatient() {
         (result) => {
           this.changeInfoPatientService.emitirEvento("RECARGA_DATA");
           this.close();
-          alert('Patient creado exitosamente');
+          this.notificationService.mostrarExito("Patient creado exitosamente");
+
           this.close(); // Cerrar el modal después de la creación exitosa del doctor
         },
         () => {
-          alert('No se pudo crear el doctor, contacta al administrador');
+          this.notificationService.mostrarError("No se pudo crear el doctor, contacta al administrador");
         }
       );
     } else {
-      alert('Por favor, completa correctamente todos los campos del formulario');
+      this.notificationService.mostrarError("Por favor, completa correctamente todos los campos del formulario");
     }
 
   }

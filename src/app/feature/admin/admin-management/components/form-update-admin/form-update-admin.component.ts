@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MdbModalRef} from "mdb-angular-ui-kit/modal";
 import {AdminService} from "../../shared/Services/admin.service";
 import {ChangeInfoAdminService} from "../../shared/Services/change-info-admin.service";
+import {NotificationService} from "../../../../../shared/notification.service";
 
 @Component({
   selector: 'app-form-update-admin',
@@ -17,7 +18,8 @@ export class FormUpdateAdminComponent implements OnInit {
     private formBuilder: FormBuilder,
     private adminService: AdminService,
     public modalRef: MdbModalRef<FormUpdateAdminComponent>,
-    private changeInfoAdminService: ChangeInfoAdminService
+    private changeInfoAdminService: ChangeInfoAdminService,
+    private notificationService: NotificationService,
   ) {
   }
 
@@ -73,10 +75,12 @@ export class FormUpdateAdminComponent implements OnInit {
         (result) => {
           this.changeInfoAdminService.emitirEvento("RECARGA_DATA");
           this.close();
-          alert('Admin actualizada con exito');
+          this.notificationService.mostrarExito("Admin actualizada con exito");
+          alert('');
         },
         () => {
-          alert('No se pudo actualizar la Admin, contacta al administrador');
+          this.notificationService.mostrarError("No se pudo actualizar la Admin, contacta al administrador");
+
         }
       );
     }

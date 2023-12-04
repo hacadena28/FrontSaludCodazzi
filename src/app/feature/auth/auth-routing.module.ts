@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'recoverPassword', component: RecoverPasswordComponent },
+  { path: 'recuperarContraseña', component: RecoverPasswordComponent },
 
 ];
 

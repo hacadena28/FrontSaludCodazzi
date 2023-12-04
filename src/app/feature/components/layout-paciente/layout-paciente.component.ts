@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, inject} from '@angular/core';
+import {Router} from '@angular/router';
+import {NotificationService} from "../../../shared/notification.service";
 
 @Component({
   selector: 'app-layout-paciente',
@@ -8,22 +9,31 @@ import { Router } from '@angular/router';
 })
 export class LayoutPacienteComponent {
 
-
+  constructor(
+    private notificationService: NotificationService,
+  ) {
+  }
 
   router = inject(Router);
 
 
-  navigateRegister(){
+  navigateRegister() {
     this.router.navigate(['clinic/patient/registrar-cita'])
   }
-  navigateConsultarCitas(){
+
+  navigateConsultarCitas() {
     this.router.navigate(['clinic/patient/consultar-citas'])
   }
 
-  navigateLogin(){
+  navigateLogin() {
     this.router.navigate(['auth/login'])
     localStorage.clear();
+    this.notificationService.mostrarExito("Sesión cerrada correctamente");
+
   }
-  showModal(state:boolean){}
-    state = true;
+
+  showModal(state: boolean) {
+  }
+
+  state = true;
 }

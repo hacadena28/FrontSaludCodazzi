@@ -6,8 +6,8 @@ import localeEs from '@angular/common/locales/es';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {LayoutModule} from "./layout/layout.module";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from "@angular/common/http";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeEs);
 
@@ -15,13 +15,15 @@ registerLocaleData(localeEs);
   declarations: [
     AppComponent,
 
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent]

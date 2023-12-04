@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/auth/register']);
   }
   recoverPassword(){
-    this.router.navigate(['/auth/recoverPassword']);
+    this.router.navigate(['/auth/recuperarContraseña']);
   }
 
   login() {

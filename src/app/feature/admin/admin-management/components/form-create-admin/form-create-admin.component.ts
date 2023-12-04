@@ -8,6 +8,7 @@ import {ChangeInfoAdminService} from "../../shared/Services/change-info-admin.se
 import {UserAdminService} from "../../shared/Services/user-admin.service";
 import {EpsService} from "../../../eps-management/shared/service/eps.service";
 import {EpsDto} from "../../../eps-management/shared/models/eps-dto.interface";
+import {NotificationService} from "../../../../../shared/notification.service";
 
 @Component({
   selector: 'app-form-create-admin',
@@ -32,6 +33,7 @@ export class FormCreateAdminComponent implements OnInit{
     private userService: UserAdminService,
     public modalRef: MdbModalRef<FormCreateAdminComponent>,
     private changeInfoAdminService: ChangeInfoAdminService,
+    private notificationService: NotificationService,
   ) {
     this.builderForms();
   }
@@ -97,15 +99,16 @@ export class FormCreateAdminComponent implements OnInit{
         (result) => {
           this.changeInfoAdminService.emitirEvento("RECARGA_DATA");
           this.close();
-          alert('Admin creado exitosamente');
-          this.close(); // Cerrar el modal después de la creación exitosa del doctor
+          this.notificationService.mostrarExito("Admin creado exitosamente");
+          this.close();
         },
         () => {
-          alert('No se pudo crear el doctor, contacta al administrador');
+          this.notificationService.mostrarError("No se pudo crear el doctor, contacta al administrador");
+          alert('');
         }
       );
     } else {
-      alert('Por favor, completa correctamente todos los campos del formulario');
+      this.notificationService.mostrarError("Por favor, completa correctamente todos los campos del formulario");
     }
 
   }

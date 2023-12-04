@@ -5,6 +5,7 @@ import {DatePipe} from "@angular/common";
 import {AppointmentDTO} from "../shared/interfaces/appointment";
 import {AppointmentService} from "../shared/services/appointment.service";
 import {ChangeInfoAppointment} from "../shared/services/chage-info-appointment.service";
+import {NotificationService} from "../../../../shared/notification.service";
 
 @Component({
   selector: 'app-reagendar-cita',
@@ -14,7 +15,7 @@ import {ChangeInfoAppointment} from "../shared/services/chage-info-appointment.s
 export class ReagendarCitaComponent implements OnInit {
   @Input() appointment!: AppointmentDTO;
 
-  constructor(public modalRef: MdbModalRef<ReagendarCitaComponent>, private changeInfoAppointment: ChangeInfoAppointment) {
+  constructor(public modalRef: MdbModalRef<ReagendarCitaComponent>, private notificationService: NotificationService, private changeInfoAppointment: ChangeInfoAppointment) {
 
   }
 
@@ -69,7 +70,7 @@ export class ReagendarCitaComponent implements OnInit {
       let appointmentStartDate = new Date(date + 'T' + hour + ':' + minute + ':00');
 
       if (this.formulario.value.appointmentStartDate < this.appointment.appointmentStartDate) {
-        alert("La fecha seleccionada no puede ser menor a la actual")
+        this.notificationService.mostrarError("La fecha seleccionada no puede ser menor a la actual")
         return;
       }
 
@@ -79,9 +80,12 @@ export class ReagendarCitaComponent implements OnInit {
         newDate: appointmentStartDate
       }).subscribe((result) => {
         this.changeInfoAppointment.emitirEvento("CHAGE_DATA");
+        this.notificationService.mostrarExito(`La cita fue reagendada correctamente ${appointmentStartDate}`)
         this.modalRef.close(true);
       }, () => {
-        alert("No se puede reagendar una cita ya reagendada");
+        this.notificationService.mostrarError(
+          "No se puede reagendar una cita ya reagendada"
+        );
       })
     }
   }

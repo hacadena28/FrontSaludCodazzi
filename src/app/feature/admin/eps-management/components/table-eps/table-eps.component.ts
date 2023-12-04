@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {EpsPaginatedDto} from "../../shared/models/eps-paginated-dto.model";
 import {EpsService} from "../../shared/service/eps.service";
 import {ChangeInfoEpsService} from "../../shared/service/chage-info-eps.service";
@@ -6,6 +6,7 @@ import {MdbModalRef, MdbModalService} from "mdb-angular-ui-kit/modal";
 import {FormUpdateEpsComponent} from "../form-update-eps/form-update-eps.component";
 import {EpsDto} from "../../shared/models/eps-dto.interface";
 import {ConfirmActionComponent} from "../../../../../shared/components/confirm-action/confirm-action.component";
+import {NotificationService} from "../../../../../shared/notification.service";
 
 @Component({
   selector: 'app-table-eps',
@@ -14,13 +15,18 @@ import {ConfirmActionComponent} from "../../../../../shared/components/confirm-a
 })
 export class TableEpsComponent {
   modalRefUpdate: MdbModalRef<FormUpdateEpsComponent> | null = null;
-  data : EpsPaginatedDto[] = [];
+  data: EpsPaginatedDto[] = [];
   page = 1;
   total = 0;
   perPage = 5;
   totalRecords = 0;
 
-  constructor(public epsService: EpsService, private changeInfoEpsService: ChangeInfoEpsService, private modalService: MdbModalService) {
+  constructor(
+    public epsService: EpsService,
+    private notificationService: NotificationService,
+    private changeInfoEpsService: ChangeInfoEpsService,
+    private modalService: MdbModalService
+  ) {
     this.changeInfoEpsService.evento.subscribe((data) => {
       debugger
       this.getData();
@@ -37,6 +43,7 @@ export class TableEpsComponent {
       this.total = response.totalRecords;
     });
   }
+
   openModalUpdate(eps: EpsDto) {
     this.modalRefUpdate = this.modalService.open(FormUpdateEpsComponent, {
       modalClass: 'modal-lg',
@@ -58,8 +65,10 @@ export class TableEpsComponent {
       if (result) {
         this.epsService.delete(id).subscribe((result) => {
           this.getData();
+          this.notificationService.mostrarExito("EPS Eliminada con exito");
+
         }, () => {
-          console.log('Fallo en eliminar, contacte con el administrador');
+          this.notificationService.mostrarExito("Fallo en eliminar, contacte con el administrador");
         });
       } else {
         console.log('Eliminación cancelada');

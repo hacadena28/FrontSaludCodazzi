@@ -7,6 +7,8 @@ import {EpsDto} from "../../admin/eps-management/shared/models/eps-dto.interface
 import {EpsService} from "../../admin/eps-management/shared/service/eps.service";
 import {TypeDocument} from "../../admin/doctor-management/shared/enums/type-document";
 import {Specialization} from "../../admin/doctor-management/shared/enums/specialization";
+import {NotificationService} from "../../../shared/notification.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-register',
@@ -22,7 +24,8 @@ export class RegisterComponent implements OnInit {
     protected createPatientService: CreatePatientService,
     protected epsService: EpsService,
     private formBuilder: FormBuilder,
-    private navegador: Router
+    private navegador: Router,
+    private notificationService: NotificationService,
   ) {
     this.builderForms();
 
@@ -30,6 +33,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEps();
+
+
   }
 
   private getEps() {
@@ -65,6 +70,8 @@ export class RegisterComponent implements OnInit {
   }
 
   registerPatient() {
+
+
     if (this.formulario.valid) {
       const createUserPatient: CreateUserPatient = {
         password: this.formulario.value.password,
@@ -83,12 +90,16 @@ export class RegisterComponent implements OnInit {
         }
       };
       this.createPatientService.create(createUserPatient).subscribe((result) => {
-        alert("Paciente creado existosamente");
+        this.notificationService.mostrarExito("Paciente creado existosamente");
         this.navegador.navigate(["auth/login"])
+
       }, () => {
-        alert("No se pudo crear el paciente, contacte con el administrador");
+        this.notificationService.mostrarError("No se pudo crear el paciente, contacte con el administrador");
+
+
       });
     }
+
   }
   validateForm(): boolean {
     const form = this.formulario;

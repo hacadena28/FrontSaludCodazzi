@@ -9,7 +9,9 @@
       <i class=""></i> Buscar
     </button>
   </div>
-
+  <div *ngIf="data.length === 0" class="text-[1.5rem] text-center">
+    <b>No hay historial medico</b>
+  </div>
   <div *ngIf="data.length > 0">
     <h2 class=" w-100 badge badge-info">{{ data[0].fullName }}</h2>
   </div>

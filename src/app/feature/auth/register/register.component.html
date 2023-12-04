@@ -10,7 +10,6 @@
       <form [formGroup]="formulario" class="w-full h-full flex gap-5 flex-wrap">
 
 
-
         <div class="w-[48%] flex items-center">
           <input formControlName="firstName" class="border-[2px] w-[100%] border-solid rounded-md h-[2.4rem] indent-3"
                  type="text" name="firstName" placeholder="Primer nombre" id="firstname"/>
@@ -132,7 +131,7 @@
       <button class="border h-[2.4rem] rounded-md w-full bg-[#2563eb] text-white"
               type="submit"
               (click)="!validateForm() || registerPatient()"
-              ><b>Registrarme</b>
+      ><b>Registrarme</b>
       </button>
     </div>
     <div class="w-[80%]">

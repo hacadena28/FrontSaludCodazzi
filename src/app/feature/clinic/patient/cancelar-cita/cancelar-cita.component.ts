@@ -5,27 +5,37 @@ import {DatePipe} from "@angular/common";
 import {AppointmentDTO} from "../shared/interfaces/appointment";
 import {AppointmentService} from "../shared/services/appointment.service";
 import {ChangeInfoAppointment} from "../shared/services/chage-info-appointment.service";
+import {NotificationService} from "../../../../shared/notification.service";
 
 @Component({
   selector: 'app-reagendar-cita',
   templateUrl: './cancelar-cita.component.html',
   styleUrls: ['./cancelar-cita.component.scss']
 })
-export class CancelarCitaComponent{
+export class CancelarCitaComponent {
   @Input() appointment!: AppointmentDTO;
-  constructor(public modalRef: MdbModalRef<CancelarCitaComponent>, private changeInfoAppointment: ChangeInfoAppointment) {
+
+  constructor(public modalRef: MdbModalRef<CancelarCitaComponent>, private notificationService: NotificationService,
+              private changeInfoAppointment: ChangeInfoAppointment) {
   }
+
   appointmentService = inject(AppointmentService);
 
   cerrar() {
     this.modalRef.close(false);
   }
+
   cancelarCita() {
-    this.appointmentService.reagendarCita({id: this.appointment.id, state: "Canceled", newDate: this.appointment.appointmentStartDate}).subscribe((result)=> {
+    this.appointmentService.reagendarCita({
+      id: this.appointment.id,
+      state: "Canceled",
+      newDate: this.appointment.appointmentStartDate
+    }).subscribe((result) => {
       this.changeInfoAppointment.emitirEvento("CHAGE_DATA");
+      this.notificationService.mostrarExito("Cita cancelada correctamente")
       this.modalRef.close(true);
     }, () => {
-      alert("Por favor ajuste la fecha, debido a que debe ser horario de oficina");
+      this.notificationService.mostrarExito("No se pudo cancelar la cita")
     })
   }
 }

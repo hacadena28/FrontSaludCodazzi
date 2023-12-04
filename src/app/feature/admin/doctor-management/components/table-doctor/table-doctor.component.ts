@@ -12,6 +12,7 @@ import {FormUpdateEpsComponent} from "../../../eps-management/components/form-up
 import {DoctorUpdate} from "../../shared/models/doctor-update";
 import {EpsPaginatedDto} from "../../../eps-management/shared/models/eps-paginated-dto.model";
 import {FormUpdateDoctorComponent} from "../form-update-doctor/form-update-doctor.component";
+import {NotificationService} from "../../../../../shared/notification.service";
 
 @Component({
   selector: 'app-table-doctor',
@@ -20,14 +21,15 @@ import {FormUpdateDoctorComponent} from "../form-update-doctor/form-update-docto
 })
 
 
-  export class TableDoctorComponent {
+export class TableDoctorComponent {
   modalRefUpdate: MdbModalRef<FormUpdateDoctorComponent> | null = null;
-  data : DoctorPaginatedDto[] = [];
+  data: DoctorPaginatedDto[] = [];
   page = 1;
   total = 0;
   perPage = 10;
   totalRecords = 0;
-  constructor(public doctorService: DoctorService, public userService: UserService, private changeInfoDoctorService: ChangeInfoDoctorService, private modalService: MdbModalService) {
+
+  constructor(public doctorService: DoctorService, private notificationService: NotificationService, public userService: UserService, private changeInfoDoctorService: ChangeInfoDoctorService, private modalService: MdbModalService) {
     this.changeInfoDoctorService.evento.subscribe((data) => {
       this.getData();
     });
@@ -78,11 +80,12 @@ import {FormUpdateDoctorComponent} from "../form-update-doctor/form-update-docto
       })
     ).subscribe(
       () => {
-        console.log('Usuario eliminado correctamente');
+        this.notificationService.mostrarExito("Usuario eliminado correctamente");
+
         this.getData();
       },
       () => {
-        console.log('Fallo en eliminar, contacte con el administrador');
+        this.notificationService.mostrarError('Fallo en eliminar, contacte con el administrador')
       }
     );
   }

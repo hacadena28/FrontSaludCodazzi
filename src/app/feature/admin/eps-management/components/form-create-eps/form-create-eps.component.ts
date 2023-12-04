@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EpsService} from "../../shared/service/eps.service";
 import {MdbModalRef} from "mdb-angular-ui-kit/modal";
 import {ChangeInfoEpsService} from "../../shared/service/chage-info-eps.service";
+import {NotificationService} from "../../../../../shared/notification.service";
 
 @Component({
   selector: 'app-form-create-eps',
@@ -16,7 +17,8 @@ export class FormCreateEpsComponent {
     private formBuilder: FormBuilder,
     private epsService: EpsService,
     public modalRef: MdbModalRef<FormCreateEpsComponent>,
-    private changeInfoEpsService: ChangeInfoEpsService
+    private changeInfoEpsService: ChangeInfoEpsService,
+    private notificationService: NotificationService,
   ) {
     this.builderForms();
   }
@@ -55,10 +57,11 @@ export class FormCreateEpsComponent {
         (result) => {
           this.changeInfoEpsService.emitirEvento("RECARGA_DATA");
           this.close();
-          alert('EPS actualizada exitosamente');
+          this.notificationService.mostrarExito('EPS actualizada exitosamente')
         },
         () => {
-          alert('No se pudo actualizar la EPS, contacta al administrador');
+
+          this.notificationService.mostrarError('No se pudo actualizar la EPS, contacta al administrador')
         }
       );
     }

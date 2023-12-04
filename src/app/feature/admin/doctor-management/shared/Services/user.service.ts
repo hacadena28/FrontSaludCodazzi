@@ -81,6 +81,10 @@ export class UserService {
     };
   }
 
+  recoveryPassword(documentNumber:string):Observable<void>{
+    return this.http.doGet<any>(`${environment.appUrl}user/recovery-password/${documentNumber}`);
+  }
+
 
 }
 

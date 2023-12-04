@@ -6,6 +6,7 @@ import {TypeDocument} from "../../shared/enums/type-document";
 import {Specialization} from "../../shared/enums/specialization";
 import {UserService} from "../../shared/Services/user.service";
 import {ChangeInfoDoctorService} from '../../shared/Services/change-info-doctor.service';
+import {NotificationService} from "../../../../../shared/notification.service";
 
 @Component({
   selector: 'app-form-create-doctor',
@@ -18,6 +19,7 @@ export class FormCreateDoctorComponent {
   specialization = Object.values(Specialization);
 
   constructor(
+    private notificationService: NotificationService,
     private formBuilder: FormBuilder,
     private doctorService: DoctorService,
     private userService: UserService,
@@ -62,7 +64,6 @@ export class FormCreateDoctorComponent {
     this.modalRef.close(closeMessage)
   }
 
-
   registerDoctor() {
     if (this.formulario.valid) {
       const doctorRegistration = {
@@ -85,16 +86,16 @@ export class FormCreateDoctorComponent {
         (result) => {
           this.changeInfoDoctorService.emitirEvento("RECARGA_DATA");
           this.close();
-          alert('Doctor creado exitosamente');
+          this.notificationService.mostrarExito("Doctor creado exitosamente");
+          alert('');
           this.close(); // Cerrar el modal después de la creación exitosa del doctor
         },
         () => {
-          alert('No se pudo crear el doctor, contacta al administrador');
+          this.notificationService.mostrarError("No se pudo crear el doctor, contacta al administrador");
         }
       );
     } else {
-      alert('Por favor, completa correctamente todos los campos del formulario');
+      this.notificationService.mostrarError("Por favor, completa correctamente todos los campos del formulario");
     }
-
   }
 }
