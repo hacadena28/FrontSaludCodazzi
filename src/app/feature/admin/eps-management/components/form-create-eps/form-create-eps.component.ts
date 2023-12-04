@@ -43,6 +43,12 @@ export class FormCreateEpsComponent {
     return form.valid;
   }
 
+  mostrar: boolean = false;
+
+  mostrarAlerta() {
+    this.mostrar = !this.mostrar;
+  }
+
   registerEPS() {
     if (this.formulario.valid) {
       this.epsService.post(this.formulario.value.name).subscribe(

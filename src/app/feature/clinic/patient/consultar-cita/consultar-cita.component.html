@@ -1,8 +1,5 @@
-<main class="py-3rem flex justify-center fondo h-screen">
+<main class="py-3rem flex justify-center fondo h-[70vh]">
   <article class="w-90 flex justify-center flex-col items-center">
-    <div class="search-bar-container flex justify-end mb-8 mt-0">
-      <input type="text" placeholder="Buscar" class="p-2 border rounded" />
-    </div>
     <table
       class="bg-white w-[90%] h-[10%] border-spacing-2 shadow-lg table-fixed"
     >
@@ -29,28 +26,24 @@
           <td class="w-[20%] border">{{ item.description }}</td>
           <td class="w-[15%] border">{{ item.appointmentStartDate | date: 'yyyy-MM-dd HH:mm a' }}</td>
           <td class="w-[15%] border text-xl">{{ item.doctorFullName }}</td>
-          <td class="w-[5%] border" [ngSwitch]="item.state">
+          <td class="" [ngSwitch]="item.state">
             <ng-container *ngSwitchCase="'Scheduled'">
               <button STYLE="background-color: #637cfa; color: white" mat-raised-button color="primary" class="m-2 rounded p-2 scheduled-state">
-                <mat-icon>schedule</mat-icon>
                 <span>{{ getStateName(item.state) }}</span>
               </button>
             </ng-container>
             <ng-container *ngSwitchCase="'Rescheduled'">
               <button STYLE="background-color: #00a6ff; color: white" mat-raised-button color="accent" class="m-2 rounded p-2 rescheduled-state">
-                <mat-icon>update</mat-icon>
                 <span>{{ getStateName(item.state) }}</span>
               </button>
             </ng-container>
             <ng-container *ngSwitchCase="'Canceled'">
               <button STYLE="background-color: #df5757; color: white" mat-raised-button color="warn" class="m-2 rounded p-2 canceled-state">
-                <mat-icon>cancel</mat-icon>
                 <span>{{ getStateName(item.state) }}</span>
               </button>
             </ng-container>
             <ng-container *ngSwitchCase="'Attended'">
               <button mat-raised-button STYLE="background-color: #08c736; color: white" class="m-2 rounded p-2 attended-state">
-                <mat-icon>check_circle</mat-icon>
                 <span>{{ getStateName(item.state) }}</span>
               </button>
             </ng-container>
