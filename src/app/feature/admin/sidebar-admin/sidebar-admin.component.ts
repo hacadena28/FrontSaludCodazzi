@@ -23,8 +23,6 @@ export class SidebarAdminComponent {
   redirectToAdmin(): void {
     this.router.navigate(['admin/admin']);
   }
-  redirectToUser(): void {
-    this.router.navigate(['admin/user']);
-  }
+
 
 }

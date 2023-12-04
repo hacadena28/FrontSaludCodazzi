@@ -20,6 +20,7 @@ export class LayoutDoctorComponent {
 
   navigateHome() {
     this.router.navigate(['home'])
+    localStorage.clear();
   }
 
   openModal() {

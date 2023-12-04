@@ -1,6 +1,6 @@
-<article class="w-full h-screen flex justify-center items-center">
+<article class="w-full h-screen flex justify-center items-center fondo">
   <section
-    class="border w-[50%] h-[70%] p-8 flex flex-col justify-center gap-8 items-center"
+    class="border bg-white w-[50%] h-[70%] p-8 flex flex-col justify-center gap-8 items-center"
   >
     <h1 class="text-4xl font-bold">Registra tu cita</h1>
     <form
@@ -56,7 +56,7 @@
       <div class="w-[48%]">
         <label for="type" class="block text-sm text-gray-700 font-bold">Tipo de Cita</label>
         <select formControlName="type" class="border w-full h-10 rounded-md px-3" name="type" id="type">
-          <option value="" disabled selected>Horas</option>
+          <option value="" disabled selected>Tipo de cita</option>
           <option *ngFor="let option of typeAppointmentOptions" [value]="option.value">
             {{ option.name }}
           </option>

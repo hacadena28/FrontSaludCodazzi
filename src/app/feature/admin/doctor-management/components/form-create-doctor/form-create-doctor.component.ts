@@ -46,6 +46,17 @@ export class FormCreateDoctorComponent {
     });
   }
 
+  validateForm(): boolean {
+    const form = this.formulario;
+    for (const i in form.controls) {
+      if (form.controls.hasOwnProperty(i)) {
+        form.controls[i].markAsTouched();
+        form.controls[i].updateValueAndValidity();
+      }
+    }
+    return form.valid;
+  }
+
   close(): void {
     const closeMessage = 'Modal closed';
     this.modalRef.close(closeMessage)

@@ -44,19 +44,29 @@ export class FormCreatePatientComponent implements OnInit{
       secondName: ['', [Validators.required, Validators.maxLength(50)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
       secondLastName: ['', [Validators.required, Validators.maxLength(50)]],
-      documentType: ['Seleccione', Validators.required],
+      documentType: ['', Validators.required],
       documentNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10), Validators.maxLength(15)]],// Ajustar el rango según el formato deseado
       address: ['', [Validators.required, Validators.maxLength(100)]],
       birthdate: ['', Validators.required],
-      eps: ['Seleccione', Validators.required],
+      eps: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
 
     });
   }
 
+  validateForm(): boolean {
+    const form = this.formulario;
+    for (const i in form.controls) {
+      if (form.controls.hasOwnProperty(i)) {
+        form.controls[i].markAsTouched();
+        form.controls[i].updateValueAndValidity();
+      }
+    }
+    return form.valid;
+  }
   close(): void {
     const closeMessage = 'Modal closed';
     this.modalRef.close(closeMessage)

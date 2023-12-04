@@ -44,6 +44,9 @@ export class LoginComponent implements OnInit {
   navigateSignup() {
     this.router.navigate(['/auth/register']);
   }
+  recoverPassword(){
+    this.router.navigate(['/auth/recoverPassword']);
+  }
 
   login() {
     const { documentNumber, password } = this.loginForm.value;
@@ -51,6 +54,7 @@ export class LoginComponent implements OnInit {
       alert("Inicio de sesion exitoso");
       this.redirect(result.role);
       localStorage.setItem('user', JSON.stringify(result));
+      localStorage.setItem('documentNumber', JSON.stringify(documentNumber));
     }, (error) => {
       alert("Credenciales erroneas");
     })

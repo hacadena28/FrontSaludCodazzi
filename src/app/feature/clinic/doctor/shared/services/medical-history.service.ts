@@ -18,6 +18,13 @@ export class MedicalHistoryService {
 
 
   getById(patientId: string): Observable<Paginated<MedicalHistoryPaginatedDto>> {
+    let userDataLocal = localStorage.getItem('user')
+    let user = JSON.parse(userDataLocal || '');
+    if (patientId === "") {
+      patientId = user.documentNumber
+    }
+
+
     return this.http.doGet<Paginated<MedicalHistoryPaginatedDto>>(`${environment.appUrl}medicalhistory/user/documentnumber/${patientId}?page=1&recordsPerPage=20`)
       .pipe(
         map((response: any) => this.mapToMedicalHistoryToPaginatedDto(response))

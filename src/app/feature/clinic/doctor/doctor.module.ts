@@ -38,6 +38,10 @@ import {MedicalHistoryService} from "./shared/services/medical-history.service";
     SharedModule,
     FormsModule
   ],
+  exports:[
+    ConsultarMedicalHistoryComponent
+  ]
+  ,
   providers: [AppointmentService, MdbModalService, DatePipe,
     SharedModule,MedicalHistoryService
   ]

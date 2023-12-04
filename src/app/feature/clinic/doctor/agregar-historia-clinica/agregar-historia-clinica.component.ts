@@ -58,12 +58,12 @@ export class AgregarHistoriaClinicaComponent {
       description: this.formulario.value.description,
       diagnosis: this.formulario.value.diagnosis,
       treatment: this.formulario.value.treatment,
-      documentoNumber: this.data.doctorFullName,
+      documentoNumber: this.data.patientId,
     }
     this.appointmentService.agregarHistoriaClinica(data).subscribe((result) => {
       this.changeInfoAppointment.emitirEvento("CHAGE_DATA");
     }, () => {
-      alert("Por favor ajuste la fecha, debido a que debe ser horario de oficina");
+      alert("No se puedo registar el historial");
     })
   }
 

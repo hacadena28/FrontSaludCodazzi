@@ -19,10 +19,17 @@ import {ChangeInfoMedicalHistoryService} from "../shared/services/change-info-me
 export class ConsultarMedicalHistoryComponent implements OnInit {
   modalRef: MdbModalRef<AgregarHistoriaClinicaComponent> | null = null;
   valorBusqueda: string = '';
-  constructor(private medicalHistory: MedicalHistoryService, private modalService: MdbModalService ,private changeInfoMedicalHistoryService: ChangeInfoMedicalHistoryService) {
-  this.changeInfoMedicalHistoryService.evento.subscribe((data) =>{
-    this.getData(this.valorBusqueda)
-  })
+  user: string = localStorage.getItem("user")!;
+  userObject = JSON.parse(this.user);
+  isDoctor: boolean = false
+
+  constructor(private medicalHistory: MedicalHistoryService, private modalService: MdbModalService, private changeInfoMedicalHistoryService: ChangeInfoMedicalHistoryService) {
+    this.changeInfoMedicalHistoryService.evento.subscribe((data) => {
+      this.getData(this.valorBusqueda)
+      console.log(this.valorBusqueda)
+
+
+    })
   }
 
   data: MedicalHistoryPaginatedDto[] = [];
@@ -33,12 +40,19 @@ export class ConsultarMedicalHistoryComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getData(this.valorBusqueda)
+ if(this.userObject.role === "Doctor"){
+   this.isDoctor = true
+ }
+      this.getData(this.valorBusqueda)
   }
 
   buscar() {
+
     this.getData(this.valorBusqueda)
+
+
   }
+
   openModal() {
     this.modalRef = this.modalService.open(AgregarHistoriaClinicaComponent, {
       modalClass: 'modal-lg',

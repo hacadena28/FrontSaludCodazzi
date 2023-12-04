@@ -22,6 +22,7 @@ export class LayoutPacienteComponent {
 
   navigateLogin(){
     this.router.navigate(['auth/login'])
+    localStorage.clear();
   }
   showModal(state:boolean){}
     state = true;

@@ -38,6 +38,16 @@ import {ChangeInfoPatientService} from "../../shared/Services/change-info-patien
     });
   }
 
+   validateForm(): boolean {
+     const form = this.formulario;
+     for (const i in form.controls) {
+       if (form.controls.hasOwnProperty(i)) {
+         form.controls[i].markAsTouched();
+         form.controls[i].updateValueAndValidity();
+       }
+     }
+     return form.valid;
+   }
   close(): void {
     console.log(this.data);
     const closeMessage = 'Modal closed';

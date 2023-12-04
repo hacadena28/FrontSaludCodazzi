@@ -13,6 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReagendarCitaComponent } from './reagendar-cita/reagendar-cita.component';
 import {MdbModalModule} from "mdb-angular-ui-kit/modal";
 import {CancelarCitaComponent} from "./cancelar-cita/cancelar-cita.component";
+import {
+  ConsultarMedicalHistoryComponent
+} from "../doctor/consultar-medical-history/consultar-medical-history.component";
+import {DoctorModule} from "../doctor/doctor.module";
 
 
 @NgModule({
@@ -21,9 +25,11 @@ import {CancelarCitaComponent} from "./cancelar-cita/cancelar-cita.component";
     RegistrarCitaComponent,
     ConsultarCitaComponent,
     ReagendarCitaComponent,
-    CancelarCitaComponent
+    CancelarCitaComponent,
+
   ],
   imports: [
+
     CommonModule,
     NgxPaginationModule,
     PatientRoutingModule,
@@ -31,6 +37,7 @@ import {CancelarCitaComponent} from "./cancelar-cita/cancelar-cita.component";
     ReactiveFormsModule,
     MatIconModule,
     MdbModalModule,
+    DoctorModule
   ],
   providers: [
     DatePipe, AppointmentService

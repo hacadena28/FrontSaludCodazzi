@@ -21,7 +21,7 @@ export class AppointmentService {
 
   getByDoctorAndDate(date: any): Observable<AppointmentDTO[]> {
     let userDataLocal = localStorage.getItem('user')
-    debugger
+
     let user;
     if (userDataLocal) {
       user = JSON.parse(userDataLocal);
@@ -32,7 +32,7 @@ export class AppointmentService {
     }
 
     console.log(user);
-    return this.http.doGet<AppointmentDTO[]>(`${environment.appUrl}appointment/user/${user.userId}`)
+    return this.http.doGet<AppointmentDTO[]>(`${environment.appUrl}appointment/day/${user.userId}/${date}`)
       .pipe(
         map((response: any) => this.mapToAppaintment(response))
       );
