@@ -65,6 +65,9 @@ export class FormCreateDoctorComponent {
   }
 
   registerDoctor() {
+    if(this.formulario.value.password == this.formulario.value.confirmPassword){
+
+
     if (this.formulario.valid) {
       const doctorRegistration = {
         password: this.formulario.value.password,
@@ -96,6 +99,10 @@ export class FormCreateDoctorComponent {
       );
     } else {
       this.notificationService.mostrarError("Por favor, completa correctamente todos los campos del formulario");
+    }
+    }else{
+      this.notificationService.mostrarError("Las contraseñas deben coincidir");
+
     }
   }
 }

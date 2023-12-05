@@ -79,6 +79,8 @@ export class FormCreateAdminComponent implements OnInit{
   }
 
   registerAdmin() {
+    if(this.formulario.value.password == this.formulario.value.confirmPassword){
+
     if (this.formulario.valid) {
       const adminRegistration = {
         password: this.formulario.value.password,
@@ -111,6 +113,10 @@ export class FormCreateAdminComponent implements OnInit{
       this.notificationService.mostrarError("Por favor, completa correctamente todos los campos del formulario");
     }
 
+    }
+    else{
+      this.notificationService.mostrarError("Las contraseñas deben coincidir")
+    }
   }
 }
 

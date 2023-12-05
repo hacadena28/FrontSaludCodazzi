@@ -82,7 +82,10 @@ export class FormCreatePatientComponent implements OnInit {
   }
 
   registerPatient() {
-    if (this.formulario.valid) {
+    if(this.formulario.value.password == this.formulario.value.confirmPassword){
+
+
+      if (this.formulario.valid) {
       const patientRegistration = {
         password: this.formulario.value.password,
         patient: {
@@ -113,6 +116,10 @@ export class FormCreatePatientComponent implements OnInit {
       );
     } else {
       this.notificationService.mostrarError("Por favor, completa correctamente todos los campos del formulario");
+    }
+    }else{
+
+      this.notificationService.mostrarError("Las contraseñas deben coincidir");
     }
 
   }
