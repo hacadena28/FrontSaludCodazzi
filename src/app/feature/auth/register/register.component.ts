@@ -71,6 +71,7 @@ export class RegisterComponent implements OnInit {
 
   registerPatient() {
 
+if(this.formulario.value.password == this.formulario.value.confirmPassword){
 
     if (this.formulario.valid) {
       const createUserPatient: CreateUserPatient = {
@@ -88,7 +89,8 @@ export class RegisterComponent implements OnInit {
           birthdate: this.formulario.value.birthdate,
           epsId: this.formulario.value.epesId
         }
-      };
+      }
+
       this.createPatientService.create(createUserPatient).subscribe((result) => {
         this.notificationService.mostrarExito("Paciente creado existosamente");
         this.navegador.navigate(["auth/login"])
@@ -99,6 +101,9 @@ export class RegisterComponent implements OnInit {
 
       });
     }
+}else{
+  this.notificationService.mostrarError("La contraseña debe coincidir");
+}
 
   }
   validateForm(): boolean {
