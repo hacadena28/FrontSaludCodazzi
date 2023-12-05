@@ -1,10 +1,12 @@
 <main class="py-3rem fondo ">
   <article class="w-100 flex justify-center flex-col items-center">
-    <div class="w-[70%]">
+    <div class="w-[90%]">
       <div *ngIf="data.length === 0" class="text-[1.5rem] text-center">
         <b>No hay citas agendadas</b>
       </div>
-      <div class="flex flex-wrap justify-around">
+        <div class="w-100 overflow-auto max-h-[85vh]">
+
+      <div class="flex flex-wrap justify-around ">
         <div *ngFor="let item of data" class="mb-4">
           <mat-card style="padding: 10px; background-color: #f5f5f5; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)">
             <mat-card-header>
@@ -53,6 +55,7 @@
             </mat-card-actions>
           </mat-card>
         </div>
+      </div>
       </div>
     </div>
   </article>
