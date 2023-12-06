@@ -25,13 +25,16 @@ export class ReagendarCitaComponent implements OnInit {
   datePipe = inject(DatePipe);
 
   hours = [
-    {value: '08', name: "08 AM"}, {value: '09', name: "09 AM"}, {value: '10', name: "10 AM"}, {
-      value: '11', name: "11 AM"
-    }, {value: '12', name: "12 AM"}, {value: '02', name: "02 PM"}, {
-      value: '03', name: "03 PM"
-    }, {value: '04', name: "04 PM"}, {value: '05', name: "05 PM"}, {
-      value: '06', name: "06 PM"
-    }];
+    {value: '08', name: "08 AM"},
+    {value: '09', name: "09 AM"},
+    {value: '10', name: "10 AM"},
+    {value: '11', name: "11 AM"},
+    {value: '12', name: "12 AM"},
+    {value: '14', name: "02 PM"},
+    {value: '15', name: "03 PM"},
+    {value: '16', name: "04 PM"},
+    {value: '17', name: "05 PM"},
+    {value: '18', name: "06 PM"}];
   minutes = ['00', '30'];
 
   ngOnInit(): void {
@@ -66,8 +69,10 @@ export class ReagendarCitaComponent implements OnInit {
       const date = this.formulario.get('date')!.value;
       const hour = this.formulario.get('hour')!.value;
       const minute = this.formulario.get('minute')!.value;
+      const datePipe = new DatePipe('es');
+      const formattedDate = datePipe.transform(date, 'yyyy-MM-dd'); // Formatear la fecha
 
-      let appointmentStartDate = new Date(date + 'T' + hour + ':' + minute + ':00');
+      const appointmentStartDate = `${formattedDate}T${hour}:${minute}:00`;
 
       if (this.formulario.value.appointmentStartDate < this.appointment.appointmentStartDate) {
         this.notificationService.mostrarError("La fecha seleccionada no puede ser menor a la actual")
@@ -82,10 +87,16 @@ export class ReagendarCitaComponent implements OnInit {
         this.changeInfoAppointment.emitirEvento("CHAGE_DATA");
         this.notificationService.mostrarExito(`La cita fue reagendada correctamente ${appointmentStartDate}`)
         this.modalRef.close(true);
-      }, () => {
-        this.notificationService.mostrarError(
-          "No se puede reagendar una cita ya reagendada"
-        );
+      }, error => {
+
+        if (error.error.message == "Fecha no disponible") {
+          this.notificationService.mostrarInfo(error.error.message)
+        } else {
+
+          this.notificationService.mostrarError(
+            "No se puede reagendar una cita ya reagendada"
+          );
+        }
       })
     }
   }

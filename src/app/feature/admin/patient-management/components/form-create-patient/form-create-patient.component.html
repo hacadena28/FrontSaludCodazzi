@@ -100,15 +100,16 @@
 
 
           <div class="w-full flex items-center">
-            <select formControlName="eps" class="border-[2px] w-full border-solid rounded-md h-[2.4rem] indent-3"
+            <select formControlName="eps" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"
                     name="eps" id="eps">
-              <option selected disabled>Seleccione una Eps</option>
+              <option value="" selected disabled>Seleccione una Eps</option>
               <option *ngFor="let eps of data" [value]="eps.id">{{eps.name}} (contributivo)</option>
             </select>
             <p class="position-relative text-red-500"
                *ngIf="formulario.get('eps')?.invalid && formulario.get('eps')?.touched">
               obligatoria</p>
           </div>
+
 
           <div class="w-full flex items-center">
             <input formControlName="password" class="border-[1px] w-full border-solid rounded-md h-[1.8rem] px-2"

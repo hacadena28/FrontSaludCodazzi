@@ -1,14 +1,20 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpService } from '@core/services/http.service';
-import { environment } from '@env/environment';
-import { Observable, map } from 'rxjs';
-import { AppointmentDTO } from '../interfaces/appointment';
-import { Paginated } from '../interfaces/paginated';
+import {Injectable, inject} from '@angular/core';
+import {HttpService} from '@core/services/http.service';
+import {environment} from '@env/environment';
+import {Observable, map} from 'rxjs';
+import {AppointmentDTO} from '../interfaces/appointment';
+import {Paginated} from '../interfaces/paginated';
+import {Doctor} from "../../../../admin/doctor-management/shared/models/doctor-registration";
 
 @Injectable()
 export class AppointmentService {
   http = inject(HttpService);
 
+
+  registrarCita(cita: any): Observable<void> {
+    debugger
+    return this.http.doPost<any, void>(`${environment.appUrl}appointment`, cita)
+  }
 
   getAllPaginated(page: number, recordsPerPage: number): Observable<Paginated<AppointmentDTO>> {
     let userDataLocal = localStorage.getItem('user')
@@ -17,6 +23,11 @@ export class AppointmentService {
       .pipe(
         map((response: any) => this.mapToAppaintmentPaginated(response))
       );
+  }
+
+  getDoctores() {
+    return this.http.doGet<Doctor[]>(`${environment.appUrl}doctor/all`);
+
   }
 
   getByDoctorAndDate(date: any): Observable<AppointmentDTO[]> {
@@ -34,20 +45,21 @@ export class AppointmentService {
       totalPages: response.totalpages,
       totalRecords: response.totalRecords,
       records: response.records.map((record: any) => new AppointmentDTO(record.id,
-        record.appointmentStartDate,record.appointmentFinalDate, record.state, record.type,
+        record.appointmentStartDate, record.appointmentFinalDate, record.state, record.type,
         record.description, record.patientId, record.doctorId, record.doctorFullName, record.patientFullName))
     }
   }
 
   private mapToAppaintment(response: any): AppointmentDTO[] {
     return response.map((record: any) => new AppointmentDTO(record.id,
-      record.appointmentStartDate,record.appointmentFinalDate, record.state, record.type,
+      record.appointmentStartDate, record.appointmentFinalDate, record.state, record.type,
       record.description, record.patientId, record.doctorId, record.doctorFullName, record.patientFullName));
   }
 
   reagendarCita(reagendarCita: any): Observable<void> {
     return this.http.doPut<any, void>(`${environment.appUrl}appointment/${reagendarCita.id}`, reagendarCita);
   }
+
 
   agregarHistoriaClinica(body: any): Observable<void> {
     return this.http.doPost<any, void>(`${environment.appUrl}medicalhistory`, body);

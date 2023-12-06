@@ -36,7 +36,6 @@ export class AgregarHistoriaClinicaComponent {
   }
 
   agregarHistoria() {
-
     if (this.formulario.valid) {
       this.appointmentService.reagendarCita({
         id: this.data.id,
@@ -46,7 +45,8 @@ export class AgregarHistoriaClinicaComponent {
         this.changeInfoAppointment.emitirEvento("CHAGE_DATA");
         this.modalRef.close(true);
         this.agregarHistoriaClinica();
-      }, () => {
+      }, error => {
+        console.log(error.error.message)
         this.notificationService.mostrarError("Por favor ajuste la fecha, debido a que debe ser horario de oficina");
 
       })
@@ -69,8 +69,10 @@ export class AgregarHistoriaClinicaComponent {
       this.changeInfoAppointment.emitirEvento("CHAGE_DATA");
       this.notificationService.mostrarExito("Historia agregada exitosamente");
 
-    }, () => {
-      this.notificationService.mostrarExito("Error al registrar historia");
+    }, error => {
+      console.log("agregar historial")
+      console.log(error.error.message)
+      this.notificationService.mostrarError("Error al registrar historia");
     })
   }
 

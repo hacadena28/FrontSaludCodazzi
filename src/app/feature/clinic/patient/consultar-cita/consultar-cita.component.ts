@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
-import { AppointmentDTO } from '../shared/interfaces/appointment';
-import { AppointmentService } from '../shared/services/appointment.service';
+import {AppointmentDTO} from '../shared/interfaces/appointment';
+import {AppointmentService} from '../shared/services/appointment.service';
 import {MdbModalRef, MdbModalService} from "mdb-angular-ui-kit/modal";
 import {ReagendarCitaComponent} from "../reagendar-cita/reagendar-cita.component";
 import {ChangeInfoAppointment} from "../shared/services/chage-info-appointment.service";
@@ -11,16 +11,17 @@ import {CancelarCitaComponent} from "../cancelar-cita/cancelar-cita.component";
   templateUrl: './consultar-cita.component.html',
   styleUrls: ['./consultar-cita.component.scss']
 })
-export class ConsultarCitaComponent implements OnInit{
+export class ConsultarCitaComponent implements OnInit {
   constructor(
     protected aS: AppointmentService,
     protected modalService: MdbModalService,
-    private changeInfoEpsAppointment :ChangeInfoAppointment
+    private changeInfoEpsAppointment: ChangeInfoAppointment
   ) {
     this.changeInfoEpsAppointment.evento.subscribe((data) => {
       this.getData(this.page);
     });
   }
+
   modalRefReagendarCita: MdbModalRef<ReagendarCitaComponent> | null = null;
   modalRefCancelarCita: MdbModalRef<CancelarCitaComponent> | null = null;
   data: AppointmentDTO[] = [];
@@ -73,6 +74,7 @@ export class ConsultarCitaComponent implements OnInit{
       this.modalRefReagendarCita.component.appointment = appointment;
     }
   }
+
   openModalCancelar(appointment: AppointmentDTO) {
     this.modalRefCancelarCita = this.modalService.open(CancelarCitaComponent, {
       modalClass: 'modal-xs',

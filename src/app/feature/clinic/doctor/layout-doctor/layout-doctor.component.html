@@ -6,23 +6,23 @@
 </head>
 
 <body>
-<article class="w-full h-full flex">
+<article class="w-[100vw] h-[100vh] flex">
   <app-sidebar-doctor></app-sidebar-doctor>
-  <section class="w-[91%] h-full flex flex-col shadow-md  fondo ">
+  <section class="w-[100%] h-full flex flex-col shadow-md  fondo ">
 
     <div class="w-full flex  h-[5rem] justify-between items-center border  ">
       <h1 class=" w-[10%] text-center text-[1.5rem] text-[#2563eb]"><b>Doctor</b></h1>
-      <div class="flex flex-col justify-center w-[5rem] h-[4rem] ">
-        <button (click)="navigateHome()" class="w-[1.8rem]"><img src="../../../../../assets/lg.png" class="w-[1.5rem]  "
-                                                                 alt="logout"></button>
+      <div class="flex flex-col justify-center w-[10%] mr-2 h-[4rem] ">
+
+        <button class="badge badge-danger p-3 d-flex align-items-center" (click)="navigateHome()  "><img
+          src="../../../../../assets/lg.png" style="filter: invert(100%);" class="w-[1.5rem]  "
+          alt="logout"><span>Cerrar sesión</span></button>
       </div>
     </div>
     <div class=" shadow p-3 h-[90vh]">
 
 
-
-        <router-outlet></router-outlet>
-
+      <router-outlet></router-outlet>
 
 
     </div>

@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {environment} from "@env/environment";
 import {DatePipe} from '@angular/common';
 import {NotificationService} from "../../../../shared/notification.service";
+import {AppointmentService} from "../shared/services/appointment.service";
+import {HttpService} from "@core/services/http.service";
 
 
 interface Doctor {
@@ -38,13 +40,9 @@ export class RegistrarCitaComponent implements OnInit {
     }];
   minutes = ['00', '30'];
   typeAppointmentOptions: any[] = [{value: 'General', name: 'General'}, {value: 'Specialized', name: 'Especializada'}];
-  horasIntermedias: string[] = [];
 
-  http = inject(HttpClient);
-  formBuilder = inject(FormBuilder);
-  datePipe = inject(DatePipe);
 
-  constructor(private notificationService: NotificationService,) {
+  constructor(private notificationService: NotificationService, private http: HttpService, private formBuilder: FormBuilder, private appointmentServices: AppointmentService) {
   }
 
   ngOnInit(): void {
@@ -79,15 +77,17 @@ export class RegistrarCitaComponent implements OnInit {
   }
 
   getDoctores() {
-    this.http.get<Doctor[]>(`${environment.appUrl}doctor/all`)
+    this.http.doGet<Doctor[]>(`${environment.appUrl}doctor/all`)
       .subscribe(data => {
         this.doctors = data;
       });
 
   }
 
+
   registrarCita() {
     if (this.formulario) {
+      debugger
       const date = this.formulario.get('date')!.value;
       const hour = this.formulario.get('hour')!.value;
       const minute = this.formulario.get('minute')!.value;
@@ -96,7 +96,13 @@ export class RegistrarCitaComponent implements OnInit {
       const userId = this.formulario.get('userId')!.value;
       const doctorId = this.formulario.get('doctor')!.value;
 
-      const appointmentStartDate = new Date(date + 'T' + hour + ':' + minute + ':00');
+
+      const datePipe = new DatePipe('es');
+      const formattedDate = datePipe.transform(date, 'yyyy-MM-dd'); // Formatear la fecha
+
+      const appointmentStartDate = `${formattedDate}T${hour}:${minute}:00`;
+
+
 
       const cita = {
         appointmentStartDate,
@@ -106,12 +112,16 @@ export class RegistrarCitaComponent implements OnInit {
         doctorId
       };
 
+      debugger
+      this.appointmentServices.registrarCita(cita).subscribe(response => {
 
-      this.http.post(`${environment.appUrl}appointment`, cita)
-        .subscribe(response => {
-          this.notificationService.mostrarExito("Cita registrada exitosamente")
-        });
+        this.notificationService.mostrarExito("Cita registrada exitosamente")
+      }, error => {
+        this.notificationService.mostrarInfo(error.error.message)
+      });
     } else {
+
+
       this.notificationService.mostrarError("Error al registrar la cita")
     }
   }
